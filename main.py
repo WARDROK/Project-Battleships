@@ -1,5 +1,5 @@
 from ships import create_fleet
-from grid import create_game_grid, update_game_logic, show_grid_on_screen
+from board import create_game_grid, update_game_logic, show_grid_on_screen
 import pygame
 pygame.init()
 
