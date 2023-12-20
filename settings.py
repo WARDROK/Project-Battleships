@@ -1,0 +1,7 @@
+# Initial settings
+
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 900
+ROWS = 10
+COLUMNS = 10
+CELL_SIZE = 50
