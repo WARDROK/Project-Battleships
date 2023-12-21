@@ -40,7 +40,7 @@ FLEET = {
     'destroyer': ['destroyer', 'images/destroyer.png',
                   (275, 600), (30, 145)],
     'submarine': ['submarine', 'images/submarine.png',
-                  (350, 600), (20, 95)],
+                  (350, 600), (30, 95)],
 }
 
 
@@ -82,17 +82,43 @@ class Ship:
         # Ship is active select
         self.active = False
 
-    def rotate_ship(self):
+    def set_center_point():
         """
-        Switch ship rotation(wertical or horizontal)
+        Set ships's center point
         """
         pass
+
+    def rotate_ship(self):
+        """
+        Change ship rotation(vertical or horizontal)
+        """
+        if self.rotation is False:
+            self.rotation = True
+        else:
+            self.rotation = False
+        self.rotate_image()
+
+    def rotate_image(self):
+        """
+        Change image (vertical or horizontal)
+        """
+        if self.rotation is True:
+            self.image = self.h_image
+            self.rect = self.h_image_rect
+        else:
+            self.image = self.v_image
+            self.rect = self.v_image_rect
+        self.h_image_rect.center = self.rect.center
+        self.v_image_rect.center = self.rect.center
 
     def draw(self, window):
         """
         Draw ship on screen
         """
         window.blit(self.image, self.rect)
+        
+        # red line around ships
+        pygame.draw.rect(window, (255, 0, 0), self.rect, 1)
 
     def check_collision(self, ship_list: list):
         """
@@ -109,12 +135,14 @@ class Ship:
         """
         Return ship to default position
         """
+        if self.rotation is True:
+            self.rotate_ship()
         self.rect.topleft = self.position
-        self.h_image_rect = self.rect.center
-        self.v_image_rect = self.rect.center
+        self.h_image_rect.center = self.rect.center
+        self.v_image_rect.center = self.rect.center
 
     def align_to_grid_edge(self, grid_coords):
-        if self.rect.topleft != self.position:
+        if self.rect.topleft != self.position and self.active is True:
 
             # Check if ship out of game grid
             if self.rect.left > grid_coords[0][-1][0] + CELL_SIZE or \
@@ -131,16 +159,19 @@ class Ship:
                 self.rect.top = grid_coords[0][0][1]
             elif self.rect.bottom > grid_coords[-1][0][1] + CELL_SIZE:
                 self.rect.bottom = grid_coords[-1][0][1] + CELL_SIZE
-            self.h_image_rect = self.rect.center
-            self.v_image_rect = self.rect.center
+            self.h_image_rect.center = self.rect.center
+            self.v_image_rect.center = self.rect.center
 
-    def align_to_edge(self, grid_coords):
+    def align_to_grid(self, grid_coords):
         for row in grid_coords:
             for cell in row:
-                if self.rect.left >= cell[0] and \
-                   self.rect.left < cell[0] + CELL_SIZE and \
-                   self.rect.top >= cell[1] and \
-                   self.rect.top < cell[1] + CELL_SIZE:
-                    self.rect.topleft = (cell[0] + ((CELL_SIZE - self.image.get_width())//2), cell[1])  # edytować wysokość wstaiwania statków
-        self.h_image_rect = self.rect.center
-        self.v_image_rect = self.rect.center
+                if self.rect.left >= cell[0] - CELL_SIZE//2 and \
+                   self.rect.left < cell[0] + CELL_SIZE//2 and \
+                   self.rect.top >= cell[1] - CELL_SIZE//2 and \
+                   self.rect.top < cell[1] + CELL_SIZE//2:
+                    if self.rotation is False:
+                        self.rect.topleft = (cell[0] + ((CELL_SIZE - self.image.get_width())//2), cell[1])
+                    else:
+                        self.rect.topleft = (cell[0], cell[1] + ((CELL_SIZE - self.image.get_height())//2))
+        self.h_image_rect.center = self.rect.center
+        self.v_image_rect.center = self.rect.center

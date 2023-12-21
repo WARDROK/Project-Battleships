@@ -56,8 +56,8 @@ def update_game_screen(window):
     # Draw ships on screen
     for ship in player_fleet:
         ship.draw(window)
-        ship.align_to_grid_edge(player_grid)
-        ship.align_to_edge(player_grid)
+        # ship.align_to_grid_edge(player_grid)
+        # ship.align_to_grid(player_grid)
 
     pygame.display.update()
 
@@ -72,11 +72,18 @@ def select_ship_and_move(ship):
         update_game_screen(GAME_SCREEN)
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
+                ship.align_to_grid_edge(player_grid)  # work but why
+                ship.align_to_grid(player_grid)
                 if not ship.check_collision(player_fleet):
                     if event.button == 1:
-                        ship.h_image_rect = ship.rect.center
-                        ship.v_image_rect = ship.rect.center
+                        ship.h_image_rect.center = ship.rect.center
+                        ship.v_image_rect.center = ship.rect.center
                         ship.active = False
+                        # update_game_screen(GAME_SCREEN)
+                        # if ship.check_collision(player_fleet):
+                        #     ship.return_to_default_potition()
+                    if event.button == 3:
+                        ship.rotate_ship()
 
 
 # Main Game Loop
