@@ -116,7 +116,7 @@ class Ship:
         Draw ship on screen
         """
         window.blit(self.image, self.rect)
-        
+
         # red line around ships
         pygame.draw.rect(window, (255, 0, 0), self.rect, 1)
 
@@ -161,6 +161,10 @@ class Ship:
                 self.rect.bottom = grid_coords[-1][0][1] + CELL_SIZE
             self.h_image_rect.center = self.rect.center
             self.v_image_rect.center = self.rect.center
+
+            if self.rect.bottom > grid_coords[-1][0][1] + CELL_SIZE or \
+               self.rect.top < grid_coords[0][0][1] - CELL_SIZE:
+                self.return_to_default_potition()
 
     def align_to_grid(self, grid_coords):
         for row in grid_coords:

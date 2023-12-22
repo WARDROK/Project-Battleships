@@ -82,8 +82,8 @@ def select_ship_and_move(ship):
                         # update_game_screen(GAME_SCREEN)
                         # if ship.check_collision(player_fleet):
                         #     ship.return_to_default_potition()
-                    if event.button == 3:
-                        ship.rotate_ship()
+                if event.button == 3:
+                    ship.rotate_ship()
 
 
 # Main Game Loop
