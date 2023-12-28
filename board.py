@@ -1,44 +1,65 @@
 import pygame
 
 
-def create_game_grid(rows: int, columns: int, cell_size: int, position: tuple):
+class Board:
     """
-    Create a game grid
-    """
-    start_x = position[0]
-    start_y = position[1]
-    grid_coordinations = []
-    for row in range(rows):
-        row_x = []
-        for column in range(columns):
-            row_x.append((start_x, start_y))
-            start_x += cell_size
-        grid_coordinations.append(row_x)
-        start_x = position[0]
-        start_y += cell_size
-    return grid_coordinations
+    Create instance of Board. Contains attributes:
 
+    :param rows: board's rows
+    :type rows: int
 
-def update_game_logic(rows: int, columns: int):
-    """
-    Update game grid with logic, " " - spaces, "X" ships
-    """
-    game_logic = []
-    for row in range(rows):
-        row_x = []
-        for column in range(columns):
-            row_x .append(' ')
-        game_logic.append(row_x)
-    return game_logic
+    :param columns: board's columns
+    :type columns: int
 
+    :param cell_size: boards's cell size
+    :type cell_size: int
 
-def show_grid_on_screen(window, cell_size, player_grid, bot_grid):
+    :param size: boards's starting coordinates (x, y)
+    :type position: tuple
     """
-    Show player and bot grids on screen
-    """
-    game_grids = [player_grid, bot_grid]
-    for grid in game_grids:
+
+    def __init__(self, rows: int, columns: int,
+                 cell_size: int, position: tuple):
+        self.rows = rows
+        self.columns = columns
+        self.cell_size = cell_size
+        self.position = position
+
+    def create_game_grid(self):
+        """
+        Create a game grid
+        """
+        start_x = self.position[0]
+        start_y = self.position[1]
+        grid_coordinations = []
+        for row in range(self.rows):
+            row_x = []
+            for column in range(self.columns):
+                row_x.append((start_x, start_y))
+                start_x += self.cell_size
+            grid_coordinations.append(row_x)
+            start_x = self.position[0]
+            start_y += self.cell_size
+        return grid_coordinations
+
+    def update_game_logic(self):
+        """
+        Update game grid with logic, " " - spaces, "X" ships
+        """
+        game_logic = []
+        for row in range(self.rows):
+            row_x = []
+            for column in range(self.columns):
+                row_x .append(' ')
+            game_logic.append(row_x)
+        return game_logic
+
+    def show_grid_on_screen(self, window):
+        """
+        Show player and bot grids on screen
+        """
+        grid = self.create_game_grid()
         for row in grid:
             for column in row:
-                rect = (column[0], column[1], cell_size, cell_size)
+                rect = (column[0], column[1], self.cell_size, self.cell_size)
                 pygame.draw.rect(window, (255, 255, 255), rect, 1)

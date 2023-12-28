@@ -167,6 +167,8 @@ class Ship:
                 self.return_to_default_potition()
 
     def align_to_grid(self, grid_coords):
+        correct_width = (CELL_SIZE - self.image.get_width())//2
+        correct_height = (CELL_SIZE - self.image.get_height())//2
         for row in grid_coords:
             for cell in row:
                 if self.rect.left >= cell[0] - CELL_SIZE//2 and \
@@ -174,8 +176,8 @@ class Ship:
                    self.rect.top >= cell[1] - CELL_SIZE//2 and \
                    self.rect.top < cell[1] + CELL_SIZE//2:
                     if self.rotation is False:
-                        self.rect.topleft = (cell[0] + ((CELL_SIZE - self.image.get_width())//2), cell[1])
+                        self.rect.topleft = (cell[0] + correct_width, cell[1])
                     else:
-                        self.rect.topleft = (cell[0], cell[1] + ((CELL_SIZE - self.image.get_height())//2))
+                        self.rect.topleft = (cell[0], cell[1] + correct_height)
         self.h_image_rect.center = self.rect.center
         self.v_image_rect.center = self.rect.center
