@@ -1,7 +1,7 @@
-from ships import create_fleet
 from board import Board
-import random
-
+from buttons import Button
+from ships import create_fleet
+from functions import load_image, random_ships_placement
 from settings import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
@@ -9,6 +9,7 @@ from settings import (
     COLUMNS,
     CELL_SIZE,
 )
+
 import pygame
 pygame.init()
 
@@ -16,6 +17,11 @@ pygame.init()
 # Display amd Board Initialization
 GAME_SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Battleships')
+BUTTON_IMAGE = load_image('images/button.png', (150, 50))
+
+BUTTONS = [
+    Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Randomize')
+]
 
 
 # Variables
@@ -62,42 +68,11 @@ def update_game_screen(window):
     for ship in bot_fleet:
         ship.draw(window)
 
+    # Draw buttons on the screen
+    for button in BUTTONS:
+        button.draw(window)
+
     pygame.display.update()
-
-
-# Random ships placement
-def random_ships_placement(ship_list, game_grid):
-    """
-    Random locate ships on the game grid
-    """
-    placed_ships = []
-    for ship in ship_list:
-        valid_position = False
-        while not valid_position:
-            ship.return_to_default_potition()
-            rotate_ship = random.choice([True, False])
-            size = (ship.h_image.get_width()//50)
-            if rotate_ship is True:
-                ship.rotate_ship()
-                y = random.randint(0, ROWS - size)
-                x = random.randint(0, COLUMNS - size - 1)
-                ship.rect.topleft = game_grid[y][x]
-            else:
-                y = random.randint(0, ROWS - size - 1)
-                x = random.randint(0, COLUMNS - size)
-                ship.rect.topleft = game_grid[y][x]
-            if len(placed_ships) > 0:
-                for item in placed_ships:
-                    if ship.rect.colliderect(item.rect):
-                        valid_position = False
-                        break
-                    else:
-                        valid_position = True
-            else:
-                valid_position = True
-            ship.align_to_grid(bot_grid)
-            ship.align_to_grid_edge(bot_grid)
-        placed_ships.append(ship)
 
 
 # Initial player's ships position

@@ -2,17 +2,7 @@ import pygame
 from settings import (
     CELL_SIZE,
 )
-
-
-def load_image(path, size, roatate=False):
-    """
-    Function to import images
-    """
-    img = pygame.image.load(path).convert_alpha()
-    img = pygame.transform.scale(img, size)
-    if roatate is True:
-        img = pygame.transform.rotate(img, -90)
-    return img
+from functions import load_image
 
 
 def create_fleet():
@@ -58,7 +48,7 @@ class Ship:
     :type position: tuple
 
     :param size: ships's size (x, y)
-    :type position: tuple
+    :type size: tuple
     """
     def __init__(self, name: str, image: str, position: tuple, size: tuple):
         self.name = name
