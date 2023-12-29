@@ -1,5 +1,6 @@
 from ships import create_fleet
 from board import Board
+import random
 
 from settings import (
     SCREEN_WIDTH,
@@ -27,7 +28,7 @@ bot_grid_position = (SCREEN_WIDTH - (ROWS * CELL_SIZE) - CELL_SIZE, 50)
 bot_board = Board(ROWS, COLUMNS, CELL_SIZE, bot_grid_position)
 bot_grid = bot_board.create_game_grid()
 bot_logic = bot_board.update_game_logic()
-bot_fleet = None
+bot_fleet = create_fleet()
 
 
 def show_game_logic():
@@ -57,7 +58,46 @@ def update_game_screen(window):
     for ship in player_fleet:
         ship.draw(window)
 
+    # Draw bot's ships on screen
+    for ship in bot_fleet:
+        ship.draw(window)
+
     pygame.display.update()
+
+
+# Random ships placement
+def random_ships_placement(ship_list, game_grid):
+    """
+    Random locate ships on the game grid
+    """
+    placed_ships = []
+    for ship in ship_list:
+        valid_position = False
+        while not valid_position:
+            ship.return_to_default_potition()
+            rotate_ship = random.choice([True, False])
+            size = (ship.h_image.get_width()//50)
+            if rotate_ship is True:
+                ship.rotate_ship()
+                y = random.randint(0, ROWS - size)
+                x = random.randint(0, COLUMNS - size - 1)
+                ship.rect.topleft = game_grid[y][x]
+            else:
+                y = random.randint(0, ROWS - size - 1)
+                x = random.randint(0, COLUMNS - size)
+                ship.rect.topleft = game_grid[y][x]
+            if len(placed_ships) > 0:
+                for item in placed_ships:
+                    if ship.rect.colliderect(item.rect):
+                        valid_position = False
+                        break
+                    else:
+                        valid_position = True
+            else:
+                valid_position = True
+            ship.align_to_grid(bot_grid)
+            ship.align_to_grid_edge(bot_grid)
+        placed_ships.append(ship)
 
 
 # Initial player's ships position
@@ -83,6 +123,7 @@ def select_ship_and_move(ship):
 
 # Main Game Loop
 if __name__ == "__main__":
+    random_ships_placement(bot_fleet, bot_grid)
     show_game_logic()
     game_run = True
     while game_run:
