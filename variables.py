@@ -2,13 +2,11 @@ from ships import create_fleet
 from board import Board
 from settings import (
     SCREEN_WIDTH,
-    # SCREEN_HEIGHT,
     ROWS,
     COLUMNS,
     CELL_SIZE,
 )
 
-# Variables
 player_board = Board(ROWS, COLUMNS, CELL_SIZE, (50, 50))
 player_grid = player_board.create_game_grid()
 player_logic = player_board.update_game_logic()

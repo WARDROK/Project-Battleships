@@ -1,40 +1,17 @@
-from board import Board
-from buttons import Button
-from ships import create_fleet
-from functions import load_image, random_ships_placement
-from settings import (
-    SCREEN_WIDTH,
-    SCREEN_HEIGHT,
-    ROWS,
-    COLUMNS,
-    CELL_SIZE,
-)
-
 import pygame
-pygame.init()
-
-
-# Display amd Board Initialization
-GAME_SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Battleships')
-BUTTON_IMAGE = load_image('images/button.png', (150, 50))
-
-BUTTONS = [
-    Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Randomize')
-]
-
-
-# Variables
-player_board = Board(ROWS, COLUMNS, CELL_SIZE, (50, 50))
-player_grid = player_board.create_game_grid()
-player_logic = player_board.update_game_logic()
-player_fleet = create_fleet()
-
-bot_grid_position = (SCREEN_WIDTH - (ROWS * CELL_SIZE) - CELL_SIZE, 50)
-bot_board = Board(ROWS, COLUMNS, CELL_SIZE, bot_grid_position)
-bot_grid = bot_board.create_game_grid()
-bot_logic = bot_board.update_game_logic()
-bot_fleet = create_fleet()
+from settings import GAME_SCREEN
+from buttons import BUTTONS
+from functions import random_ships_placement
+from variables import (
+    player_board,
+    player_grid,
+    player_logic,
+    player_fleet,
+    bot_board,
+    bot_grid,
+    bot_logic,
+    bot_fleet,
+)
 
 
 def show_game_logic():
@@ -112,6 +89,9 @@ if __name__ == "__main__":
                         if ship.rect.collidepoint(pygame.mouse.get_pos()):
                             ship.active = True
                             select_ship_and_move(ship)
+                    for button in BUTTONS:
+                        if button.rect.collidepoint(pygame.mouse.get_pos()):
+                            button.action_on_press()
 
         update_game_screen(GAME_SCREEN)
 
