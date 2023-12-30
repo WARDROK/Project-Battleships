@@ -56,14 +56,23 @@ class Button:
         """
         Make button actions when clicked
         """
-        if self.name == "Randomize":
+        if self.name == 'Randomize':
             self.randomize(player_fleet, player_grid)
+        elif self.name == 'Reset':
+            self.reset(player_fleet)
 
     def randomize(self, ship_list, game_grid):
         """
         Call random ship placement fucntion
         """
         random_ships_placement(ship_list, game_grid)
+
+    def reset(self, ship_list):
+        """
+        Set ships on default positions
+        """
+        for ship in ship_list:
+            ship.return_to_default_potition()
 
     def draw(self, window):
         self.focus_on_button(window)
@@ -72,5 +81,6 @@ class Button:
 
 BUTTON_IMAGE = load_image('images/button.png', (150, 50))
 BUTTONS = [
-    Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Randomize')
+    Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Randomize'),
+    Button(BUTTON_IMAGE, (150, 50), (200, 900), 'Reset'),
 ]
