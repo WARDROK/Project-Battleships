@@ -1,6 +1,6 @@
 import pygame
 from settings import GAME_SCREEN
-from buttons import BUTTONS
+from buttons import BUTTONS, deployment_phase_button
 from functions import random_ships_placement
 from variables import (
     player_board,
@@ -47,7 +47,8 @@ def update_game_screen(window):
 
     # Draw buttons on the screen
     for button in BUTTONS:
-        button.draw(window)
+        if deployment_phase and button.name in deployment_phase_button:
+            button.draw(window)
 
     pygame.display.update()
 
@@ -78,6 +79,10 @@ if __name__ == "__main__":
     random_ships_placement(bot_fleet, bot_grid)
     show_game_logic()
     game_run = True
+    deployment_phase = True
+    game_phase = False
+    next_phase = False
+    ships_placed = False
     while game_run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -85,13 +90,25 @@ if __name__ == "__main__":
             # Only after start game and before deploy
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    for ship in player_fleet:
-                        if ship.rect.collidepoint(pygame.mouse.get_pos()):
-                            ship.active = True
-                            select_ship_and_move(ship)
+                    if deployment_phase:
+                        for ship in player_fleet:
+                            if ship.rect.collidepoint(pygame.mouse.get_pos()):
+                                ship.active = True
+                                select_ship_and_move(ship)
                     for button in BUTTONS:
                         if button.rect.collidepoint(pygame.mouse.get_pos()):
-                            button.action_on_press()
+                            dpb = deployment_phase_button
+                            if deployment_phase and button.name in dpb:
+                                button.action_on_press()
+                            if button.name == "Deploy":
+                                for ship in player_fleet:
+                                    if ship.rect.topleft != ship.position:
+                                        ships_placed = True
+                                    else:
+                                        ships_placed = False
+                                if ships_placed:
+                                    deployment_phase = False
+                                    game_phase = True
 
         update_game_screen(GAME_SCREEN)
 

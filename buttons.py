@@ -83,4 +83,7 @@ BUTTON_IMAGE = load_image('images/button.png', (150, 50))
 BUTTONS = [
     Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Randomize'),
     Button(BUTTON_IMAGE, (150, 50), (200, 900), 'Reset'),
+    Button(BUTTON_IMAGE, (150, 50), (375, 900), 'Deploy'),
 ]
+
+deployment_phase_button = ['Randomize', 'Reset', 'Deploy']
