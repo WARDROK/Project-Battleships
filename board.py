@@ -46,7 +46,11 @@ class Board:
 
     def create_game_logic(self):
         """
-        Create game grid with logic, " " - spaces, "X" ships
+        Create game grid with logic
+        ' ' - spaces
+        'O' - ships
+        'H' - hitted
+        'X' - missed
         """
         game_logic = []
         for row in range(self.rows):

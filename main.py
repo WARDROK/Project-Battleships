@@ -85,6 +85,9 @@ if __name__ == "__main__":
                             if ship.rect.collidepoint(pygame.mouse.get_pos()):
                                 ship.active = True
                                 select_ship_and_move(ship)
+                    if game_phase:
+                        if player.turn:
+                            player.make_attack(bot.grid, bot.logic)
                     for button in BUTTONS:
                         if button.rect.collidepoint(pygame.mouse.get_pos()):
                             dpb = deployment_phase_button
@@ -99,8 +102,10 @@ if __name__ == "__main__":
                                 if ships_placed:
                                     deployment_phase = False
                                     game_phase = True
+                                    player.turn = True
                                     player.update_game_logic()
-                                    show_game_logic()
+                if event.button == 2:
+                    show_game_logic()
 
         update_game_screen(GAME_SCREEN)
 

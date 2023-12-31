@@ -11,6 +11,7 @@ class Gamer:
         self.fleet = create_fleet()
         self.grid = self.board.grid
         self.logic = self.board.logic
+        self.turn = False
 
     def random_ships_placement(self):
         """
@@ -66,6 +67,28 @@ class Gamer:
 class Player(Gamer):
     def __init__(self, board: Board):
         super().__init__(board)
+
+    def make_attack(self, grid, logic):
+        """
+        During player's turn, player select attack cell within bot grid
+        """
+        pos_x, pos_y = pygame.mouse.get_pos()
+        if pos_x >= grid[0][0][0] and pos_x <= grid[0][-1][0] + CELL_SIZE and \
+           pos_y >= grid[0][0][1] and pos_y <= grid[-1][0][1] + CELL_SIZE:
+            for i, row in enumerate(grid):
+                for j, col in enumerate(row):
+                    if pos_x >= col[0] and pos_x <= col[0] + CELL_SIZE and \
+                       pos_y >= col[1] and pos_y <= col[1] + CELL_SIZE:
+                        if logic[i][j] == 'H' or logic[i][j] == 'X':
+                            print("'Don't repeat shoot in the same place")
+                        elif logic[i][j] != ' ' or logic[i][j] == 'O':
+                            print('Hit')
+                            logic[i][j] = 'H'
+                            self.turn = False
+                        else:
+                            print('Miss')
+                            logic[i][j] = 'X'
+                            self.turn = False
 
 
 class Bot(Gamer):
