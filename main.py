@@ -88,6 +88,13 @@ if __name__ == "__main__":
                     if game_phase:
                         if player.turn:
                             player.make_attack(bot.grid, bot.logic)
+                            if not player.turn:
+                                bot.turn = True
+                        if bot.turn:
+                            bot.make_attack(player.grid, player.logic)
+                            if not bot.turn:
+                                player.turn = True
+
                     for button in BUTTONS:
                         if button.rect.collidepoint(pygame.mouse.get_pos()):
                             dpb = deployment_phase_button

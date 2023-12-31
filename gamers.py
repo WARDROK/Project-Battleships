@@ -94,6 +94,27 @@ class Player(Gamer):
 class Bot(Gamer):
     def __init__(self, board: Board):
         super().__init__(board)
+        self.status = self.bot_status('Attacking...')
+
+    def bot_status(self, msg):
+        image = pygame.font.SysFont('Stencil', 22)
+        return image.render(msg, 1, (0, 0, 0))
+
+    def make_attack(self, grid, logic):
+        valid_choice = False
+        while not valid_choice:
+            row = random.randint(0, 9)
+            col = random.randint(0, 9)
+            if logic[row][col] == ' ' or logic[row][col] == 'O':
+                valid_choice = True
+        if logic[row][col] == 'O':
+            print("Hit Player's ship")
+            logic[row][col] = 'H'
+            self.turn = False
+        else:
+            print('Missed')
+            logic[row][col] = 'X'
+            self.turn = False
 
 
 player = Player(Board(ROWS, COLUMNS, CELL_SIZE, (CELL_SIZE, CELL_SIZE)))
