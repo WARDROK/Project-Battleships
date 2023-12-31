@@ -1,3 +1,4 @@
+import pygame
 import random
 from board import Board
 from ships import create_fleet
@@ -9,7 +10,7 @@ class Gamer:
         self.board = board
         self.fleet = create_fleet()
         self.grid = self.board.grid
-        self.logic = self.board.create_game_logic()
+        self.logic = self.board.logic
 
     def random_ships_placement(self):
         """
@@ -43,6 +44,23 @@ class Gamer:
                 ship.align_to_grid(self.grid)
                 ship.align_to_grid_edge(self.grid)
             placed_ships.append(ship)
+
+    def update_game_logic(self):
+        """
+        Update game grid with position of the ships
+        """
+        grid_coords = self.grid
+        game_logic = self.logic
+        for i, row in enumerate(grid_coords):
+            for j, col in enumerate(row):
+                if game_logic[i][j] == 'H' or game_logic[i][j] == 'X':
+                    continue
+                else:
+                    game_logic[i][j] = ' '
+                    for ship in self.fleet:
+                        data = col[0], col[1], CELL_SIZE, CELL_SIZE
+                        if pygame.rect.Rect(data).colliderect(ship.rect):
+                            game_logic[i][j] = "O"
 
 
 class Player(Gamer):

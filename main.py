@@ -67,7 +67,7 @@ def select_ship_and_move(ship):
 # Main Game Loop
 if __name__ == "__main__":
     bot.random_ships_placement()
-    show_game_logic()
+    bot.update_game_logic()
     game_run = True
     deployment_phase = True
     game_phase = False
@@ -99,7 +99,8 @@ if __name__ == "__main__":
                                 if ships_placed:
                                     deployment_phase = False
                                     game_phase = True
-                                    # player_board.update_game_logic(ship_list)
+                                    player.update_game_logic()
+                                    show_game_logic()
 
         update_game_screen(GAME_SCREEN)
 
