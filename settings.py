@@ -1,10 +1,10 @@
 import pygame
 
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 1000
+CELL_SIZE = 50  # 50 optimal
+SCREEN_WIDTH = 1280/50*CELL_SIZE
+SCREEN_HEIGHT = 1000/50*CELL_SIZE
 ROWS = 10
 COLUMNS = 10
-CELL_SIZE = 50
 
 pygame.init()
 GAME_SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -20,3 +20,7 @@ def load_image(path, size, roatate=False):
     if roatate is True:
         img = pygame.transform.rotate(img, -90)
     return img
+
+
+def scale(number):
+    return number/50*CELL_SIZE

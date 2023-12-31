@@ -22,7 +22,7 @@ class Gamer:
             while not valid_position:
                 ship.return_to_default_potition()
                 rotate_ship = random.choice([True, False])
-                size = (ship.h_image.get_width()//50)
+                size = (ship.h_image.get_width()//CELL_SIZE)
                 if rotate_ship is True:
                     ship.rotate_ship()
                     y = random.randint(0, ROWS - size)
@@ -73,7 +73,7 @@ class Bot(Gamer):
         super().__init__(board)
 
 
-player = Player(Board(ROWS, COLUMNS, CELL_SIZE, (50, 50)))
+player = Player(Board(ROWS, COLUMNS, CELL_SIZE, (CELL_SIZE, CELL_SIZE)))
 
-bot_grid_position = (SCREEN_WIDTH - (ROWS * CELL_SIZE) - CELL_SIZE, 50)
+bot_grid_position = (SCREEN_WIDTH - (ROWS * CELL_SIZE) - CELL_SIZE, CELL_SIZE)
 bot = Bot(Board(ROWS, COLUMNS, CELL_SIZE, bot_grid_position))

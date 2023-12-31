@@ -1,5 +1,5 @@
 import pygame
-from settings import CELL_SIZE, load_image
+from settings import CELL_SIZE, load_image, scale
 
 
 def create_fleet():
@@ -19,15 +19,15 @@ def create_fleet():
 
 FLEET = {
     'carrier': ['carrier', 'images/carrier.png',
-                (50, 600), (45, 245)],
+                (scale(50), scale(600)), (scale(45), scale(245))],
     'battleship': ['battleship', 'images/battleship.png',
-                   (125, 600), (30, 195)],
+                   (scale(125), scale(600)), (scale(30), scale(195))],
     'cruiser': ['cruiser', 'images/cruiser.png',
-                (200, 600), (30, 145)],
+                (scale(200), scale(600)), (scale(30), scale(145))],
     'destroyer': ['destroyer', 'images/destroyer.png',
-                  (275, 600), (30, 145)],
+                  (scale(275), scale(600)), (scale(30), scale(145))],
     'submarine': ['submarine', 'images/submarine.png',
-                  (350, 600), (30, 95)],
+                  (scale(350), scale(600)), (scale(30), scale(95))],
 }
 
 

@@ -1,5 +1,5 @@
 import pygame
-from settings import load_image
+from settings import load_image, scale
 from gamers import player
 
 
@@ -24,10 +24,11 @@ class Button:
     def __init__(self, image, size, pos, msg):
         self.name = msg
         self.image = image
-        scale = pygame.transform.scale(image, (size[0] + 10, size[1] + 10))
-        self.image_larger = scale
+        data = scale(size[0] + 10), scale(size[1] + 10)
+        transform = pygame.transform.scale(image, data)
+        self.image_larger = transform
         self.rect = self.image.get_rect()
-        self.rect.topleft = pos
+        self.rect.topleft = (scale(pos[0]), scale(pos[1]))
         self.active = False
         self.msg = self.add_text(msg)
         self.msg_rect = self.msg.get_rect(center=self.rect.center)
@@ -36,7 +37,7 @@ class Button:
         """
         Add text to button
         """
-        font = pygame.font.SysFont('Stencil', 36)
+        font = pygame.font.SysFont('Stencil', round(scale(36)))
         return font.render(msg, 1, (255, 255, 255))
 
     def focus_on_button(self, window):
@@ -44,7 +45,8 @@ class Button:
         Larger image when mouse focus on button
         """
         if self.rect.collidepoint(pygame.mouse.get_pos()):
-            window.blit(self.image_larger, (self.rect[0] - 5, self.rect[1] - 5,
+            window.blit(self.image_larger, (self.rect[0] - scale(5),
+                                            self.rect[1] - scale(5),
                                             self.rect[2], self.rect[3]))
         else:
             window.blit(self.image, self.rect)
@@ -76,7 +78,7 @@ class Button:
         window.blit(self.msg, self.msg_rect)
 
 
-BUTTON_IMAGE = load_image('images/button.png', (150, 50))
+BUTTON_IMAGE = load_image('images/button.png', (scale(150), scale(50)))
 BUTTONS = [
     Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Randomize'),
     Button(BUTTON_IMAGE, (150, 50), (200, 900), 'Reset'),
