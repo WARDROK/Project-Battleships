@@ -1,7 +1,5 @@
 import pygame
-from settings import (
-    CELL_SIZE,
-)
+from settings import CELL_SIZE
 from functions import load_image
 
 

@@ -1,7 +1,6 @@
 import pygame
 from settings import GAME_SCREEN
 from buttons import BUTTONS, deployment_phase_button
-from functions import random_ships_placement
 from gamers import player, bot
 
 
@@ -67,7 +66,7 @@ def select_ship_and_move(ship):
 
 # Main Game Loop
 if __name__ == "__main__":
-    random_ships_placement(bot.fleet, bot.grid)
+    bot.random_ships_placement()
     show_game_logic()
     game_run = True
     deployment_phase = True
