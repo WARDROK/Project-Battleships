@@ -1,5 +1,5 @@
 import pygame
-from functions import load_image
+from settings import load_image
 from gamers import player
 
 

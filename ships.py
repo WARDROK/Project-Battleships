@@ -1,6 +1,5 @@
 import pygame
-from settings import CELL_SIZE
-from functions import load_image
+from settings import CELL_SIZE, load_image
 
 
 def create_fleet():
