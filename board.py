@@ -1,4 +1,5 @@
 import pygame
+from settings import CELL_SIZE
 
 
 class Board:
@@ -24,6 +25,7 @@ class Board:
         self.columns = columns
         self.cell_size = cell_size
         self.position = position
+        self.grid = self.create_game_grid()
 
     def create_game_grid(self):
         """
@@ -31,20 +33,20 @@ class Board:
         """
         start_x = self.position[0]
         start_y = self.position[1]
-        grid_coordinations = []
+        grid = []
         for row in range(self.rows):
             row_x = []
             for column in range(self.columns):
                 row_x.append((start_x, start_y))
                 start_x += self.cell_size
-            grid_coordinations.append(row_x)
+            grid.append(row_x)
             start_x = self.position[0]
             start_y += self.cell_size
-        return grid_coordinations
+        return grid
 
-    def update_game_logic(self):
+    def create_game_logic(self):
         """
-        Update game grid with logic, " " - spaces, "X" ships
+        Create game grid with logic, " " - spaces, "X" ships
         """
         game_logic = []
         for row in range(self.rows):
@@ -53,6 +55,23 @@ class Board:
                 row_x .append(' ')
             game_logic.append(row_x)
         return game_logic
+
+    def update_game_logic(self, ship_list):
+        """
+        Update game grid with position of the ships
+        """
+        grid_coords = self.create_game_grid
+        game_logic = self.create_game_logic
+        for i, row in enumerate(grid_coords):
+            for j, col in enumerate(grid_coords):
+                if game_logic[i][j] == 'T' or game_logic[i][j] == 'X':
+                    continue
+                else:
+                    game_logic[i][j] = ' '
+                    for ship in ship_list:
+                        data = col[0], col[1], CELL_SIZE
+                        if pygame.rect.Rect(data).colliderect(ship.rect):
+                            game_logic[i][j] = "O"
 
     def show_grid_on_screen(self, window):
         """

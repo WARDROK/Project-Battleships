@@ -1,9 +1,6 @@
 import pygame
 from functions import random_ships_placement, load_image
-from variables import (
-    player_grid,
-    player_fleet,
-)
+from gamers import player
 
 
 class Button:
@@ -57,9 +54,9 @@ class Button:
         Make button actions when clicked
         """
         if self.name == 'Randomize':
-            self.randomize(player_fleet, player_grid)
+            self.randomize(player.fleet, player.grid)
         elif self.name == 'Reset':
-            self.reset(player_fleet)
+            self.reset(player.fleet)
 
     def randomize(self, ship_list, game_grid):
         """

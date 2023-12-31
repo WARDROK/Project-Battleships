@@ -2,16 +2,7 @@ import pygame
 from settings import GAME_SCREEN
 from buttons import BUTTONS, deployment_phase_button
 from functions import random_ships_placement
-from variables import (
-    player_board,
-    player_grid,
-    player_logic,
-    player_fleet,
-    bot_board,
-    bot_grid,
-    bot_logic,
-    bot_fleet,
-)
+from gamers import player, bot
 
 
 def show_game_logic():
@@ -19,10 +10,10 @@ def show_game_logic():
     Show game logic in terminal
     """
     print(' Player Grid '.center(50, '#'))
-    for _ in player_logic:
+    for _ in player.logic:
         print(_)
     print(' Bot Grid '.center(50, '#'))
-    for _ in bot_logic:
+    for _ in bot.logic:
         print(_)
 
 
@@ -34,15 +25,15 @@ def update_game_screen(window):
     window.fill((0, 0, 0))
 
     # Draw player and bot grids on srceen
-    player_board.show_grid_on_screen(window)
-    bot_board.show_grid_on_screen(window)
+    player.board.show_grid_on_screen(window)
+    bot.board.show_grid_on_screen(window)
 
     # Draw ships on screen
-    for ship in player_fleet:
+    for ship in player.fleet:
         ship.draw(window)
 
     # Draw bot's ships on screen
-    for ship in bot_fleet:
+    for ship in bot.fleet:
         ship.draw(window)
 
     # Draw buttons on the screen
@@ -63,9 +54,9 @@ def select_ship_and_move(ship):
         update_game_screen(GAME_SCREEN)
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
-                ship.align_to_grid_edge(player_grid)
-                ship.align_to_grid(player_grid)
-                if not ship.check_collision(player_fleet):
+                ship.align_to_grid_edge(player.grid)
+                ship.align_to_grid(player.grid)
+                if not ship.check_collision(player.fleet):
                     if event.button == 1:
                         ship.h_image_rect.center = ship.rect.center
                         ship.v_image_rect.center = ship.rect.center
@@ -76,7 +67,7 @@ def select_ship_and_move(ship):
 
 # Main Game Loop
 if __name__ == "__main__":
-    random_ships_placement(bot_fleet, bot_grid)
+    random_ships_placement(bot.fleet, bot.grid)
     show_game_logic()
     game_run = True
     deployment_phase = True
@@ -91,7 +82,7 @@ if __name__ == "__main__":
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     if deployment_phase:
-                        for ship in player_fleet:
+                        for ship in player.fleet:
                             if ship.rect.collidepoint(pygame.mouse.get_pos()):
                                 ship.active = True
                                 select_ship_and_move(ship)
@@ -101,7 +92,7 @@ if __name__ == "__main__":
                             if deployment_phase and button.name in dpb:
                                 button.action_on_press()
                             if button.name == "Deploy":
-                                for ship in player_fleet:
+                                for ship in player.fleet:
                                     if ship.rect.topleft != ship.position:
                                         ships_placed = True
                                     else:
@@ -109,6 +100,7 @@ if __name__ == "__main__":
                                 if ships_placed:
                                     deployment_phase = False
                                     game_phase = True
+                                    # player_board.update_game_logic(ship_list)
 
         update_game_screen(GAME_SCREEN)
 
