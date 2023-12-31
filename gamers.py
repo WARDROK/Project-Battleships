@@ -1,6 +1,6 @@
 import pygame
 import random
-from board import Board
+from board import Board, Token
 from ships import create_fleet
 from settings import ROWS, COLUMNS, CELL_SIZE, SCREEN_WIDTH
 
@@ -84,10 +84,14 @@ class Player(Gamer):
                         elif logic[i][j] != ' ' or logic[i][j] == 'O':
                             print('Hit')
                             logic[i][j] = 'H'
+                            board_token.append(Token('images/redtoken.png',
+                                                     (col)))
                             self.turn = False
                         else:
                             print('Miss')
                             logic[i][j] = 'X'
+                            board_token.append(Token('images/bluetoken.png',
+                                                     (col)))
                             self.turn = False
 
 
@@ -110,10 +114,12 @@ class Bot(Gamer):
         if logic[row][col] == 'O':
             print("Hit Player's ship")
             logic[row][col] = 'H'
+            board_token.append(Token('images/redtoken.png', grid[row][col]))
             self.turn = False
         else:
             print('Missed')
             logic[row][col] = 'X'
+            board_token.append(Token('images/bluetoken.png', grid[row][col]))
             self.turn = False
 
 
@@ -121,3 +127,5 @@ player = Player(Board(ROWS, COLUMNS, CELL_SIZE, (CELL_SIZE, CELL_SIZE)))
 
 bot_grid_position = (SCREEN_WIDTH - (ROWS * CELL_SIZE) - CELL_SIZE, CELL_SIZE)
 bot = Bot(Board(ROWS, COLUMNS, CELL_SIZE, bot_grid_position))
+
+board_token = []

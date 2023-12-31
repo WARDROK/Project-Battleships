@@ -1,6 +1,6 @@
 import pygame
 
-CELL_SIZE = 50  # 50 optimal
+CELL_SIZE = 40  # 50 optimal
 SCREEN_WIDTH = 1280/50*CELL_SIZE
 SCREEN_HEIGHT = 1000/50*CELL_SIZE
 ROWS = 10

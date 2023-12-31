@@ -1,7 +1,7 @@
 import pygame
 from settings import GAME_SCREEN
 from buttons import BUTTONS, deployment_phase_button
-from gamers import player, bot
+from gamers import player, bot, board_token
 
 
 def show_game_logic():
@@ -39,6 +39,11 @@ def update_game_screen(window):
     for button in BUTTONS:
         if deployment_phase and button.name in deployment_phase_button:
             button.draw(window)
+
+    # Draw tokenn on the screen
+    for token in board_token:
+        if game_phase:
+            token.draw(window)
 
     pygame.display.update()
 

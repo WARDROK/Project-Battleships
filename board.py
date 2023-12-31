@@ -1,4 +1,5 @@
 import pygame
+from settings import CELL_SIZE, load_image
 
 
 class Board:
@@ -69,3 +70,26 @@ class Board:
             for column in row:
                 rect = (column[0], column[1], self.cell_size, self.cell_size)
                 pygame.draw.rect(window, (255, 255, 255), rect, 1)
+
+
+class Token:
+    """
+    Create instance of Token. Contains attributes:
+
+    :param image: token's image
+    :type image: str
+
+    :param pos: token's position
+    :type pos: tuple
+    """
+    def __init__(self, image: str, pos: tuple) -> None:
+        self.image = load_image(image, (CELL_SIZE, CELL_SIZE))
+        self.pos = pos
+        self.rect = self.image.get_rect()
+        self.rect.topleft = self.pos
+
+    def draw(self, window):
+        """
+        Draw token on screen
+        """
+        window.blit(self.image, self.rect)
