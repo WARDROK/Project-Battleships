@@ -25,9 +25,9 @@ class Board:
         self.columns = columns
         self.cell_size = cell_size
         self.position = position
-        self.grid = self.create_game_grid()
+        self.grid = self.create_grid()
 
-    def create_game_grid(self):
+    def create_grid(self):
         """
         Create a game grid
         """
@@ -60,7 +60,7 @@ class Board:
         """
         Update game grid with position of the ships
         """
-        grid_coords = self.create_game_grid
+        grid_coords = self.grid
         game_logic = self.create_game_logic
         for i, row in enumerate(grid_coords):
             for j, col in enumerate(grid_coords):
@@ -77,7 +77,7 @@ class Board:
         """
         Show player and bot grids on screen
         """
-        grid = self.create_game_grid()
+        grid = self.grid
         for row in grid:
             for column in row:
                 rect = (column[0], column[1], self.cell_size, self.cell_size)
