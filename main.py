@@ -1,4 +1,5 @@
 import pygame
+import numpy as np
 from settings import GAME_SCREEN
 from buttons import BUTTONS, deployment_phase_button
 from gamers import player, bot, board_token
@@ -23,27 +24,28 @@ def update_game_screen(window):
     """
     window.fill((0, 0, 0))
 
-    # Draw player and bot grids on srceen
-    player.board.show_grid_on_screen(window)
-    bot.board.show_grid_on_screen(window)
+    if deployment_phase or game_phase:
+        # Draw player and bot grids on srceen
+        player.board.show_grid_on_screen(window)
+        bot.board.show_grid_on_screen(window)
 
-    # Draw ships on screen
-    for ship in player.fleet:
-        ship.draw(window)
+        # Draw ships on screen
+        for ship in player.fleet:
+            ship.draw(window)
 
-    # Draw bot's ships on screen
-    for ship in bot.fleet:
-        ship.draw(window)
+        # Draw bot's ships on screen
+        for ship in bot.fleet:
+            ship.draw(window)
+
+        # Draw tokenn on the screen
+    for token in board_token:
+        if game_phase:
+            token.draw(window)
 
     # Draw buttons on the screen
     for button in BUTTONS:
         if deployment_phase and button.name in deployment_phase_button:
             button.draw(window)
-
-    # Draw tokenn on the screen
-    for token in board_token:
-        if game_phase:
-            token.draw(window)
 
     pygame.display.update()
 
@@ -78,6 +80,8 @@ if __name__ == "__main__":
     game_phase = False
     next_phase = False
     ships_placed = False
+    player_win = False
+    player_defeat = True
     while game_run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -93,10 +97,18 @@ if __name__ == "__main__":
                     if game_phase:
                         if player.turn:
                             player.make_attack(bot.grid, bot.logic)
+                            if not ('O' in np.array(bot.logic)):
+                                game_phase = False
+                                player_win = True
+                                print('Player won')
                             if not player.turn:
                                 bot.turn = True
                         if bot.turn:
                             bot.make_attack(player.grid, player.logic)
+                            if not ('O' in np.array(player.logic)):
+                                game_phase = False
+                                player_defeat = True
+                                print('Player defeat')
                             if not bot.turn:
                                 player.turn = True
 
