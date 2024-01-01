@@ -51,6 +51,8 @@ def update_game_screen(window):
             button.draw(window)
         elif (game_phase or end_game) and button.name == 'Menu':
             button.draw(window)
+        elif start_phase and button.name == 'Start Game':
+            button.draw(window)
 
     pygame.display.update()
 
@@ -78,11 +80,11 @@ def select_ship_and_move(ship):
 
 # Main Game Loop
 if __name__ == "__main__":
-    bot.random_ships_placement()
-    bot.update_game_logic()
+    # bot.random_ships_placement()
+    # bot.update_game_logic()
     game_run = True
-    start_phase = False
-    deployment_phase = True
+    start_phase = True
+    deployment_phase = False
     game_phase = False
     ships_placed = False
     player_win = False
@@ -143,6 +145,15 @@ if __name__ == "__main__":
                                 player_win = False
                                 player_defeat - False
                                 end_game = False
+                            if start_phase and button.name == "Start Game":
+                                bot.clean_logic()
+                                bot.random_ships_placement()
+                                bot.update_game_logic()
+                                for ship in player.fleet:
+                                    ship.return_to_default_potition()
+                                player.clean_logic()
+                                start_phase = False
+                                deployment_phase = True
                 if event.button == 2:
                     show_game_logic()
 

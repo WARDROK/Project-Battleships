@@ -1,5 +1,5 @@
 import pygame
-from settings import load_image, scale
+from settings import load_image, scale, SCREEN_HEIGHT, SCREEN_WIDTH
 from gamers import player
 
 
@@ -84,8 +84,9 @@ BUTTONS = [
     Button(BUTTON_IMAGE, (150, 50), (200, 900), 'Reset'),
     Button(BUTTON_IMAGE, (150, 50), (375, 900), 'Deploy'),
     Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Menu'),
-
+    Button(BUTTON_IMAGE, (150, 50),
+           ((SCREEN_WIDTH - scale(150))//2, (SCREEN_HEIGHT - scale(50))//2),
+           'Start Game')
 ]
 
 deployment_phase_button = ['Randomize', 'Reset', 'Deploy']
-menu_button = ['Menu']

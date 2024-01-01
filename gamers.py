@@ -10,12 +10,12 @@ class Gamer:
         self.board = board
         self.fleet = create_fleet()
         self.grid = self.board.grid
-        self.logic = self.board.logic
+        self.logic = self.clean_logic()
         self.turn = False
         self.tokens = []
 
     def clean_logic(self):
-        self.logic = self.board.logic
+        self.logic = self.board.create_game_logic()
 
     def random_ships_placement(self):
         """
