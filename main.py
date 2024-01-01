@@ -2,7 +2,7 @@ import pygame
 import numpy as np
 from settings import GAME_SCREEN
 from buttons import BUTTONS, deployment_phase_button
-from gamers import player, bot, board_token
+from gamers import player, bot
 
 
 def show_game_logic():
@@ -37,8 +37,11 @@ def update_game_screen(window):
         # for ship in bot.fleet:
         #     ship.draw(window)
 
-        # Draw tokenn on the screen
-    for token in board_token:
+    elif start_phase:
+        pass
+
+    # Draw tokens on the screen
+    for token in player.tokens + bot.tokens:
         if game_phase:
             token.draw(window)
 

@@ -57,7 +57,7 @@ class Board:
         for row in range(self.rows):
             row_x = []
             for column in range(self.columns):
-                row_x .append(' ')
+                row_x.append(' ')
             game_logic.append(row_x)
         return game_logic
 
