@@ -83,6 +83,9 @@ BUTTONS = [
     Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Randomize'),
     Button(BUTTON_IMAGE, (150, 50), (200, 900), 'Reset'),
     Button(BUTTON_IMAGE, (150, 50), (375, 900), 'Deploy'),
+    Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Menu'),
+
 ]
 
 deployment_phase_button = ['Randomize', 'Reset', 'Deploy']
+menu_button = ['Menu']

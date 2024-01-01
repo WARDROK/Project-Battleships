@@ -34,8 +34,8 @@ def update_game_screen(window):
             ship.draw(window)
 
         # Draw bot's ships on screen
-        for ship in bot.fleet:
-            ship.draw(window)
+        # for ship in bot.fleet:
+        #     ship.draw(window)
 
         # Draw tokenn on the screen
     for token in board_token:
@@ -45,6 +45,8 @@ def update_game_screen(window):
     # Draw buttons on the screen
     for button in BUTTONS:
         if deployment_phase and button.name in deployment_phase_button:
+            button.draw(window)
+        elif (game_phase or end_game) and button.name == 'Menu':
             button.draw(window)
 
     pygame.display.update()
@@ -76,12 +78,13 @@ if __name__ == "__main__":
     bot.random_ships_placement()
     bot.update_game_logic()
     game_run = True
+    start_phase = False
     deployment_phase = True
     game_phase = False
-    next_phase = False
     ships_placed = False
     player_win = False
-    player_defeat = True
+    player_defeat = False
+    end_game = False
     while game_run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -100,6 +103,7 @@ if __name__ == "__main__":
                             if not ('O' in np.array(bot.logic)):
                                 game_phase = False
                                 player_win = True
+                                end_game = True
                                 print('Player won')
                             if not player.turn:
                                 bot.turn = True
@@ -108,6 +112,7 @@ if __name__ == "__main__":
                             if not ('O' in np.array(player.logic)):
                                 game_phase = False
                                 player_defeat = True
+                                end_game = True
                                 print('Player defeat')
                             if not bot.turn:
                                 player.turn = True
@@ -117,7 +122,7 @@ if __name__ == "__main__":
                             dpb = deployment_phase_button
                             if deployment_phase and button.name in dpb:
                                 button.action_on_press()
-                            if button.name == "Deploy":
+                            if deployment_phase and button.name == "Deploy":
                                 for ship in player.fleet:
                                     if ship.rect.topleft != ship.position:
                                         ships_placed = True
@@ -128,6 +133,13 @@ if __name__ == "__main__":
                                     game_phase = True
                                     player.turn = True
                                     player.update_game_logic()
+                            phase2 = game_phase or end_game
+                            if phase2 and button.name == "Menu":
+                                start_phase = True
+                                game_phase = False
+                                player_win = False
+                                player_defeat - False
+                                end_game = False
                 if event.button == 2:
                     show_game_logic()
 
