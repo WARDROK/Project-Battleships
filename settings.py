@@ -1,8 +1,17 @@
 import pygame
 
-CELL_SIZE = 50  # 50 optimal
-SCREEN_WIDTH = 1600/50*CELL_SIZE
-SCREEN_HEIGHT = 980/50*CELL_SIZE
+
+with open('screen_resolution.txt')as fh:
+    width = fh.readline()
+    height = fh.readline()
+    screen_width = int(width[13::])
+    screen_height = int(height[14::])
+    if screen_width < 800 or screen_height < 600:
+        raise ValueError()
+
+CELL_SIZE = 50*screen_height/1080
+SCREEN_WIDTH = screen_width
+SCREEN_HEIGHT = screen_height
 ROWS = 10
 COLUMNS = 10
 

@@ -126,8 +126,8 @@ class Bot(Gamer):
         """
         valid_choice = False
         while not valid_choice:
-            row = random.randint(0, 9)
-            col = random.randint(0, 9)
+            row = random.randint(0, ROWS - 1)
+            col = random.randint(0, COLUMNS - 1)
             if logic[row][col] == ' ' or logic[row][col] == 'O':
                 valid_choice = True
         if logic[row][col] == 'O':
