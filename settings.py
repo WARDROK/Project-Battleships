@@ -24,7 +24,7 @@ CELL_SIZE = 50*screen_height/1080
 SCREEN_WIDTH = screen_width
 SCREEN_HEIGHT = screen_height
 ROWS = 10
-COLUMNS = 10
+COLUMNS = ROWS
 
 pygame.init()
 GAME_SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))

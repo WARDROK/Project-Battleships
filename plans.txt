@@ -1,0 +1,25 @@
+1. czy dać requirements.txt pygame?
+
+Dzień dobry. Mam pytanie odnośnie projektu. Jeśli korzystam z niestandardowej bibiloteki pygame
+to wystarczy jedynie opisać ten fakt w dokumentacji? 
+Oraz mam pytanie odnośnie konsultacji. Czy byłaby możliwość spotkania zdalnie po 20:00 w środę lub w piątek przed 18:00?
+
+Do zrobienia:
+hard bot
+testy:
+show_game_logic()
+create_game_logic()
+clean_logic()
+resolution errors 4
+make_attack()
+
+dokumentacja
+
+
+Część refleksyjna
+Funkcja która ma na celu dopasowanie statku do planszy, gdy jego fragment w momencie ustawiania
+wystawał poza planszę nie została idealnie dopracowana.
+Nie udało się rozwiązać dopasowania do planszy w przypadku, gdy statek jest w większośći poza planszą,
+a dotyka jedynie rogu planszy, gdyż statek ustawiał się w taki sposób, że wystwał poza planszę.
+W tej sytuacji zdecydowałem się, że w takim przypadku statek powróci na swoją domyślną pozycję
+i będzie możliwy do ponownego ustawienia
