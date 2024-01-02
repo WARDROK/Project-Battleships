@@ -1,13 +1,24 @@
 import pygame
+from errors import (LowWidthResolution, LowHeightResolution,
+                    WrongResolutionData, NotFile)
 
+try:
+    with open('screen_resolution.txt')as fh:
+        width = fh.readline()
+        height = fh.readline()
+        screen_width = int(width[13::])
+        screen_height = int(height[14::])
+        if screen_width < 800:
+            raise LowWidthResolution(screen_width)
+        if screen_height < 600:
+            raise LowHeightResolution(screen_height)
+except ValueError:
+    raise WrongResolutionData()
+except FileNotFoundError:
+    with open('screen_resolution.txt', 'w') as fh:
+        fh.write('screen_width=1280\nscreen_height=720')
+    raise NotFile()
 
-with open('screen_resolution.txt')as fh:
-    width = fh.readline()
-    height = fh.readline()
-    screen_width = int(width[13::])
-    screen_height = int(height[14::])
-    if screen_width < 800 or screen_height < 600:
-        raise ValueError()
 
 CELL_SIZE = 50*screen_height/1080
 SCREEN_WIDTH = screen_width
