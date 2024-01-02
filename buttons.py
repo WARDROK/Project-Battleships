@@ -18,8 +18,6 @@ class Button:
 
     :param msg: button's message
     :type msg: str
-
-
     """
     def __init__(self, image, size, pos, msg, center=False):
         self.name = msg
@@ -80,6 +78,9 @@ class Button:
             ship.return_to_default_potition()
 
     def draw(self, window):
+        """
+        Draw button on screen
+        """
         self.focus_on_button(window)
         window.blit(self.msg, self.msg_rect)
 

@@ -47,7 +47,7 @@ class Ship:
     :param size: ships's size (x, y)
     :type size: tuple
     """
-    def __init__(self, name: str, image: str, position: tuple, size: tuple):
+    def __init__(self, name, image, position, size):
         self.name = name
         self.position = position
         # Vertical image
@@ -107,7 +107,7 @@ class Ship:
         # red line around ships
         # pygame.draw.rect(window, (255, 0, 0), self.rect, 1)
 
-    def check_collision(self, ship_list: list):
+    def check_collision(self, ship_list):
         """
         Check if ship is colliding with others ships
         """
@@ -129,6 +129,9 @@ class Ship:
         self.v_image_rect.center = self.rect.center
 
     def align_to_grid_edge(self, grid_coords):
+        """
+        Adjust ship position to the game grid edge
+        """
         if self.rect.topleft != self.position and self.active is True:
 
             # Check if ship out of game grid
@@ -154,6 +157,9 @@ class Ship:
                 self.return_to_default_potition()
 
     def align_to_grid(self, grid_coords):
+        """
+        Adjust ship position to the game grid
+        """
         correct_width = (CELL_SIZE - self.image.get_width())//2
         correct_height = (CELL_SIZE - self.image.get_height())//2
         for row in grid_coords:

@@ -6,6 +6,12 @@ from settings import ROWS, COLUMNS, CELL_SIZE, SCREEN_WIDTH
 
 
 class Gamer:
+    """
+    Create instance of gamer. Contains attributes:
+
+    :param image: gamer's board
+    :type image: Board
+    """
     def __init__(self, board: Board):
         self.board = board
         self.fleet = create_fleet()
@@ -15,6 +21,9 @@ class Gamer:
         self.tokens = []
 
     def clean_logic(self):
+        """
+        Set empty logic
+        """
         self.logic = self.board.create_game_logic()
 
     def random_ships_placement(self):
@@ -69,12 +78,16 @@ class Gamer:
 
 
 class Player(Gamer):
-    def __init__(self, board: Board):
-        super().__init__(board)
+    """
+    Create instance of player. Contains attributes:
+
+    :param image: player's board
+    :type image: Board
+    """
 
     def make_attack(self, grid, logic):
         """
-        During player's turn, player select attack cell within bot grid
+        Function to change board logic
         """
         pos_x, pos_y = pygame.mouse.get_pos()
         if pos_x >= grid[0][0][0] and pos_x <= grid[0][-1][0] + CELL_SIZE and \
@@ -86,13 +99,13 @@ class Player(Gamer):
                         if logic[i][j] == 'H' or logic[i][j] == 'X':
                             print("'Don't repeat shoot in the same place")
                         elif logic[i][j] != ' ' or logic[i][j] == 'O':
-                            print('Hit')
+                            print("Player hit enemy's ship")
                             logic[i][j] = 'H'
                             self.tokens.append(Token('images/redtoken.png',
                                                      (col)))
                             self.turn = False
                         else:
-                            print('Miss')
+                            print('Player miss')
                             logic[i][j] = 'X'
                             self.tokens.append(Token('images/bluetoken.png',
                                                      (col)))
@@ -100,10 +113,17 @@ class Player(Gamer):
 
 
 class Bot(Gamer):
-    def __init__(self, board: Board):
-        super().__init__(board)
+    """
+    Create instance of bot. Contains attributes:
+
+    :param image: bot's board
+    :type image: Board
+    """
 
     def make_attack(self, grid, logic):
+        """
+        Function to change board logic
+        """
         valid_choice = False
         while not valid_choice:
             row = random.randint(0, 9)
@@ -111,12 +131,12 @@ class Bot(Gamer):
             if logic[row][col] == ' ' or logic[row][col] == 'O':
                 valid_choice = True
         if logic[row][col] == 'O':
-            print("Hit Player's ship")
+            print("Bot hit player's ship")
             logic[row][col] = 'H'
             self.tokens.append(Token('images/redtoken.png', grid[row][col]))
             self.turn = False
         else:
-            print('Missed')
+            print('Bot miss')
             logic[row][col] = 'X'
             self.tokens.append(Token('images/bluetoken.png', grid[row][col]))
             self.turn = False

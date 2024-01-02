@@ -1,4 +1,0 @@
-1. dwie plansze
-2. statki 5,4,3,3,2 łącznie 17, plansze 10x10
-3. statki nie mogą się stykać, po zatopieniu statku pola wokół stają się jakby były trafione(może inny kolor)
-4. opisać gamer

@@ -1,6 +1,8 @@
 import pygame
 import numpy as np
-from settings import GAME_SCREEN, START_BG, GAME_BG, P_GRID, B_GRID, B_GRID_POS, SHIPS_ZONE, SHIPS_ZONE_POS, PLAYER_WIN, DEFEAT
+from settings import (GAME_SCREEN, START_BG, GAME_BG,
+                      P_GRID, B_GRID, B_GRID_POS, SHIPS_ZONE,
+                      SHIPS_ZONE_POS, PLAYER_WIN, DEFEAT)
 from buttons import BUTTONS, deployment_phase_button
 from gamers import player, bot
 
@@ -17,7 +19,6 @@ def show_game_logic():
         print(_)
 
 
-# Screen update function
 def update_game_screen(window):
     """
     Function to update screen
@@ -31,6 +32,7 @@ def update_game_screen(window):
         window.blit(B_GRID, B_GRID_POS)
         player.board.show_grid_on_screen(window)
         bot.board.show_grid_on_screen(window)
+        # Draw player's ship zone
         if deployment_phase:
             window.blit(SHIPS_ZONE, SHIPS_ZONE_POS)
 
@@ -42,6 +44,7 @@ def update_game_screen(window):
         # for ship in bot.fleet:
         #     ship.draw(window)
 
+    # Draw backgrounds
     elif start_phase:
         window.blit(START_BG, (0, 0))
     elif player_win:
@@ -101,7 +104,6 @@ if __name__ == "__main__":
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game_run = False
-            # Only after start game and before deploy
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     if deployment_phase:
@@ -163,6 +165,7 @@ if __name__ == "__main__":
                                 player.clean_logic()
                                 start_phase = False
                                 deployment_phase = True
+                # Show game logic in terminal, when middle mouse button clicked
                 if event.button == 2:
                     show_game_logic()
 

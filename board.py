@@ -18,7 +18,6 @@ class Board:
     :param size: boards's starting coordinates (x, y)
     :type position: tuple
     """
-
     def __init__(self, rows: int, columns: int,
                  cell_size: int, position: tuple):
         self.rows = rows
