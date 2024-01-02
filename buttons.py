@@ -21,14 +21,20 @@ class Button:
 
 
     """
-    def __init__(self, image, size, pos, msg):
+    def __init__(self, image, size, pos, msg, center=False):
         self.name = msg
         self.image = image
-        data = scale(size[0] + 10), scale(size[1] + 10)
-        transform = pygame.transform.scale(image, data)
-        self.image_larger = transform
+        data1 = scale(size[0]), scale(size[1])
+        transform = pygame.transform.scale(image, data1)
+        data2 = scale(size[0] + 10), scale(size[1] + 10)
+        transform_large = pygame.transform.scale(image, data2)
+        self.image = transform
+        self.image_larger = transform_large
         self.rect = self.image.get_rect()
         self.rect.topleft = (scale(pos[0]), scale(pos[1]))
+        if center:
+            self.rect.topleft = ((SCREEN_WIDTH - scale(size[0]))//2,
+                                 (SCREEN_HEIGHT - scale(size[1]))//2)
         self.active = False
         self.msg = self.add_text(msg)
         self.msg_rect = self.msg.get_rect(center=self.rect.center)
@@ -84,9 +90,7 @@ BUTTONS = [
     Button(BUTTON_IMAGE, (150, 50), (200, 900), 'Reset'),
     Button(BUTTON_IMAGE, (150, 50), (375, 900), 'Deploy'),
     Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Menu'),
-    Button(BUTTON_IMAGE, (150, 50),
-           ((SCREEN_WIDTH - scale(150))//2, (SCREEN_HEIGHT - scale(50))//2),
-           'Start Game')
+    Button(BUTTON_IMAGE, (300, 100), (0, 0), 'Start Game', True)
 ]
 
 deployment_phase_button = ['Randomize', 'Reset', 'Deploy']

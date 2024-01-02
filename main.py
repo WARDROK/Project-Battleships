@@ -1,6 +1,6 @@
 import pygame
 import numpy as np
-from settings import GAME_SCREEN
+from settings import GAME_SCREEN, START_BG, GAME_BG, P_GRID, B_GRID, B_GRID_POS, SHIPS_ZONE, SHIPS_ZONE_POS, PLAYER_WIN, DEFEAT
 from buttons import BUTTONS, deployment_phase_button
 from gamers import player, bot
 
@@ -26,8 +26,13 @@ def update_game_screen(window):
 
     if deployment_phase or game_phase:
         # Draw player and bot grids on srceen
+        window.blit(GAME_BG, (0, 0))
+        window.blit(P_GRID, (0, 0))
+        window.blit(B_GRID, B_GRID_POS)
         player.board.show_grid_on_screen(window)
         bot.board.show_grid_on_screen(window)
+        if deployment_phase:
+            window.blit(SHIPS_ZONE, SHIPS_ZONE_POS)
 
         # Draw ships on screen
         for ship in player.fleet:
@@ -38,7 +43,11 @@ def update_game_screen(window):
         #     ship.draw(window)
 
     elif start_phase:
-        pass
+        window.blit(START_BG, (0, 0))
+    elif player_win:
+        window.blit(PLAYER_WIN, (0, 0))
+    elif player_defeat:
+        window.blit(DEFEAT, (0, 0))
 
     # Draw tokens on the screen
     for token in player.tokens + bot.tokens:
@@ -80,8 +89,6 @@ def select_ship_and_move(ship):
 
 # Main Game Loop
 if __name__ == "__main__":
-    # bot.random_ships_placement()
-    # bot.update_game_logic()
     game_run = True
     start_phase = True
     deployment_phase = False
@@ -110,7 +117,7 @@ if __name__ == "__main__":
                                 player_win = True
                                 end_game = True
                                 print('Player won')
-                            if not player.turn:
+                            elif not player.turn:
                                 bot.turn = True
                         if bot.turn:
                             bot.make_attack(player.grid, player.logic)
@@ -119,7 +126,7 @@ if __name__ == "__main__":
                                 player_defeat = True
                                 end_game = True
                                 print('Player defeat')
-                            if not bot.turn:
+                            elif not bot.turn:
                                 player.turn = True
 
                     for button in BUTTONS:
@@ -146,6 +153,8 @@ if __name__ == "__main__":
                                 player_defeat - False
                                 end_game = False
                             if start_phase and button.name == "Start Game":
+                                player.tokens.clear()
+                                bot.tokens.clear()
                                 bot.clean_logic()
                                 bot.random_ships_placement()
                                 bot.update_game_logic()

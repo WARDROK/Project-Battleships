@@ -105,7 +105,7 @@ class Ship:
         window.blit(self.image, self.rect)
 
         # red line around ships
-        pygame.draw.rect(window, (255, 0, 0), self.rect, 1)
+        # pygame.draw.rect(window, (255, 0, 0), self.rect, 1)
 
     def check_collision(self, ship_list: list):
         """
