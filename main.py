@@ -1,4 +1,5 @@
 import pygame
+from math import dist
 import numpy as np
 from settings import (GAME_SCREEN, START_BG, GAME_BG,
                       P_GRID, B_GRID, B_GRID_POS, SHIPS_ZONE,
@@ -138,7 +139,8 @@ if __name__ == "__main__":
                                 button.action_on_press()
                             if deployment_phase and button.name == "Deploy":
                                 for ship in player.fleet:
-                                    if ship.rect.topleft != ship.position:
+                                    if dist(ship.rect.topleft,
+                                            ship.position) > 10:
                                         ships_placed = True
                                     else:
                                         ships_placed = False
