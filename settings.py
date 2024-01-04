@@ -2,21 +2,29 @@ import pygame
 from errors import (LowWidthResolution, LowHeightResolution,
                     WrongResolutionData, NotFile)
 
+
+def set_default_resolution():
+    with open('screen_resolution.txt', 'w') as fh:
+        fh.write('screen_width=1280\nscreen_height=720')
+
+
 try:
-    with open('screen_resolution.txt')as fh:
+    with open('screen_resolution.txt') as fh:
         width = fh.readline()
         height = fh.readline()
         screen_width = int(width[13::])
         screen_height = int(height[14::])
         if screen_width < 800:
+            set_default_resolution()
             raise LowWidthResolution(screen_width)
         if screen_height < 600:
+            set_default_resolution()
             raise LowHeightResolution(screen_height)
 except ValueError:
+    set_default_resolution()
     raise WrongResolutionData()
 except FileNotFoundError:
-    with open('screen_resolution.txt', 'w') as fh:
-        fh.write('screen_width=1280\nscreen_height=720')
+    set_default_resolution()
     raise NotFile()
 
 
