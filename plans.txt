@@ -5,12 +5,10 @@ to wystarczy jedynie opisać ten fakt w dokumentacji?
 Oraz mam pytanie odnośnie konsultacji. Czy byłaby możliwość spotkania zdalnie po 20:00 w środę lub w piątek przed 18:00?
 
 Do zrobienia:
-hard bot
 testy:
 show_game_logic()
 create_game_logic()
 clean_logic()
-resolution errors 4
 make_attack()
 
 dokumentacja
