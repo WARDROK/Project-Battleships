@@ -1,5 +1,6 @@
 import pygame
 import random
+import numpy as np
 from board import Board, Token
 from ships import create_fleet
 from settings import ROWS, COLUMNS, CELL_SIZE, SCREEN_WIDTH
@@ -116,20 +117,69 @@ class Bot(Gamer):
     """
     Create instance of bot. Contains attributes:
 
-    :param image: bot's board
-    :type image: Board
+    :param board: bot's board
+    :type borad: Board
     """
+    def find_target(self, logic: np.ndarray):
+        for row in range(ROWS):
+            for col in range(COLUMNS):
+                if logic[row, col] == 'H':
+                    around = []
+                    if row - 1 >= 0:
+                        up = (row - 1, col)
+                        around.append(up)
+                    if row + 1 <= ROWS - 1:
+                        down = (row + 1, col)
+                        around.append(down)
+                    if col - 1 >= 0:
+                        left = (row, col - 1)
+                        around.append(left)
+                    if col + 1 <= COLUMNS - 1:
+                        right = (row, col + 1)
+                        around.append(right)
+                    amount = len(around)
+                    for element in range(amount):
+                        pos = random.choice(around)
+                        around.remove(pos)
+                        if logic[pos[0], pos[1]] == 'H' or\
+                           logic[pos[0], pos[1]] == 'X':
+                            continue
+                        else:
+                            return (pos[0], pos[1])
 
     def make_attack(self, grid, logic):
         """
         Function to change board logic
         """
+        np_logic = np.array(logic)
         valid_choice = False
+        if self.find_target(np_logic):
+            target = self.find_target(np_logic)
+            row = target[0]
+            col = target[1]
+            valid_choice = True
+
         while not valid_choice:
             row = random.randint(0, ROWS - 1)
             col = random.randint(0, COLUMNS - 1)
-            if logic[row][col] == ' ' or logic[row][col] == 'O':
+            if logic[row][col] == ' ':
+                aroundX = True
+                if row - 1 >= 0 and not\
+                        (logic[row - 1][col] == 'X'):
+                    aroundX = False
+                elif row + 1 <= (ROWS - 1) and not\
+                        (logic[row + 1][col] == 'X'):
+                    aroundX = False
+                elif col - 1 >= 0 and not\
+                        (logic[row][col - 1] == 'X'):
+                    aroundX = False
+                elif col + 1 <= (COLUMNS - 1) and not\
+                        (logic[row][col + 1] == 'X'):
+                    aroundX = False
+                valid_choice = not aroundX
+            if logic[row][col] == 'O':
                 valid_choice = True
+
         if logic[row][col] == 'O':
             print("Bot hit player's ship")
             logic[row][col] = 'H'
