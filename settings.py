@@ -3,12 +3,14 @@ from errors import (LowWidthResolution, LowHeightResolution,
                     WrongResolutionData, NotFile)
 
 
-def set_default_resolution():
+def set_default_resolution(screen_width: str = '1280',
+                           screen_height: str = '720') -> None:
     with open('screen_resolution.txt', 'w') as fh:
-        fh.write('screen_width=1280\nscreen_height=720')
+        fh.write(f'screen_width={screen_width}\nscreen_height={screen_height}')
 
 
-def read_resolution(screen_width: str = None, screen_height: str = None):
+def read_resolution(screen_width: str = None,
+                    screen_height: str = None) -> tuple[str, str]:
     try:
         with open('screen_resolution.txt') as fh:
             if screen_width:
@@ -48,7 +50,9 @@ GAME_SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Battleships')
 
 
-def load_image(path, size, roatate=False):
+def load_image(path: str,
+               size: tuple[float, float],
+               roatate=False) -> pygame.surface.Surface:
     """
     Function to import images
     """
@@ -59,7 +63,7 @@ def load_image(path, size, roatate=False):
     return img
 
 
-def scale(number):
+def scale(number: float) -> float:
     """
     Function to make scale based on CELL_SIZE
     """
