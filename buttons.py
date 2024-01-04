@@ -20,6 +20,7 @@ class Button:
     :type msg: str
     """
     def __init__(self, image, size, pos, msg, center=False):
+        self.center = center
         self.name = msg
         self.image = image
         data1 = scale(size[0]), scale(size[1])
@@ -41,7 +42,10 @@ class Button:
         """
         Add text to button
         """
-        font = pygame.font.SysFont('Stencil', round(scale(36)))
+        if self.center:
+            font = pygame.font.SysFont('Sans', round(scale(36)))
+        else:
+            font = pygame.font.SysFont('Sans', round(scale(20)))
         return font.render(msg, 1, (255, 255, 255))
 
     def focus_on_button(self, window):
@@ -91,7 +95,7 @@ BUTTONS = [
     Button(BUTTON_IMAGE, (150, 50), (200, 900), 'Reset'),
     Button(BUTTON_IMAGE, (150, 50), (375, 900), 'Deploy'),
     Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Menu'),
-    Button(BUTTON_IMAGE, (300, 100), (0, 0), 'Start Game', True)
+    Button(BUTTON_IMAGE, (300, 100), (0, 0), 'Start Game', center=True)
 ]
 
 deployment_phase_button = ['Randomize', 'Reset', 'Deploy']
