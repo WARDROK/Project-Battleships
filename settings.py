@@ -5,24 +5,29 @@ from errors import (LowWidthResolution, LowHeightResolution,
 
 def set_default_resolution(screen_width: str = '1280',
                            screen_height: str = '720') -> None:
+    """
+    Set default resolution
+    """
     with open('screen_resolution.txt', 'w') as fh:
         fh.write(f'screen_width={screen_width}\nscreen_height={screen_height}')
 
 
 def read_resolution(screen_width: str = None,
-                    screen_height: str = None) -> tuple[str, str]:
+                    screen_height: str = None,
+                    file: str = None) -> tuple[str, str]:
+    """
+    Read resolution from file[default: 'screen_resolution.txt']
+    """
+    if file is None:
+        file = 'screen_resolution.txt'
     try:
-        with open('screen_resolution.txt') as fh:
-            if screen_width:
-                screen_width = int(screen_width[13::])
-            else:
-                width = fh.readline()
-                screen_width = int(width[13::])
-            if screen_height:
-                screen_height = int(screen_height[14::])
-            else:
-                height = fh.readline()
-                screen_height = int(height[14::])
+        with open(file) as fh:
+            if screen_width is None:
+                screen_width = fh.readline()
+            screen_width = int(screen_width[13::])
+            if screen_height is None:
+                screen_height = fh.readline()
+            screen_height = int(screen_height[14::])
             if screen_width < 800:
                 set_default_resolution()
                 raise LowWidthResolution(screen_width)
