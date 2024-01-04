@@ -66,7 +66,8 @@ def update_game_screen(window):
             button.draw(window)
         elif start_phase and button.name == 'Start Game':
             button.draw(window)
-
+        if button.name == 'Quit':
+            button.draw(window)
     pygame.display.update()
 
 
@@ -134,6 +135,8 @@ if __name__ == "__main__":
 
                     for button in BUTTONS:
                         if button.rect.collidepoint(pygame.mouse.get_pos()):
+                            if button.name == "Quit":
+                                game_run = False
                             dpb = deployment_phase_button
                             if deployment_phase and button.name in dpb:
                                 button.action_on_press()

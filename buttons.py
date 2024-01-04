@@ -95,6 +95,7 @@ BUTTONS = [
     Button(BUTTON_IMAGE, (150, 50), (200, 900), 'Reset'),
     Button(BUTTON_IMAGE, (150, 50), (375, 900), 'Deploy'),
     Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Menu'),
+    Button(BUTTON_IMAGE, (150, 50), (1745, 900), 'Quit'),
     Button(BUTTON_IMAGE, (300, 100), (0, 0), 'Start Game', center=True)
 ]
 
