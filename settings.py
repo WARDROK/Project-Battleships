@@ -8,29 +8,38 @@ def set_default_resolution():
         fh.write('screen_width=1280\nscreen_height=720')
 
 
-try:
-    with open('screen_resolution.txt') as fh:
-        width = fh.readline()
-        height = fh.readline()
-        screen_width = int(width[13::])
-        screen_height = int(height[14::])
-        if screen_width < 800:
-            set_default_resolution()
-            raise LowWidthResolution(screen_width)
-        if screen_height < 600:
-            set_default_resolution()
-            raise LowHeightResolution(screen_height)
-except ValueError:
-    set_default_resolution()
-    raise WrongResolutionData()
-except FileNotFoundError:
-    set_default_resolution()
-    raise NotFile()
+def read_resolution(screen_width: str = None, screen_height: str = None):
+    try:
+        with open('screen_resolution.txt') as fh:
+            if screen_width:
+                screen_width = int(screen_width[13::])
+            else:
+                width = fh.readline()
+                screen_width = int(width[13::])
+            if screen_height:
+                screen_height = int(screen_height[14::])
+            else:
+                height = fh.readline()
+                screen_height = int(height[14::])
+            if screen_width < 800:
+                set_default_resolution()
+                raise LowWidthResolution(screen_width)
+            if screen_height < 600:
+                set_default_resolution()
+                raise LowHeightResolution(screen_height)
+    except ValueError:
+        set_default_resolution()
+        raise WrongResolutionData()
+    except FileNotFoundError:
+        set_default_resolution()
+        raise NotFile()
+    return (screen_width, screen_height)
 
 
-CELL_SIZE = 50*screen_height/1080
-SCREEN_WIDTH = screen_width
-SCREEN_HEIGHT = screen_height
+res = read_resolution()
+CELL_SIZE = 50*res[1]/1080
+SCREEN_WIDTH = res[0]
+SCREEN_HEIGHT = res[1]
 ROWS = 10
 COLUMNS = ROWS
 
