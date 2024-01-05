@@ -1,17 +1,12 @@
-# testy:
-# show_game_logic()
-# create_game_logic()
 # clean_logic()
-# resolution errors 4
-# make_attack()
 import pytest
 from settings import read_resolution
 from errors import (LowHeightResolution,
                     LowWidthResolution,
                     WrongResolutionData,
-                    NotFile)
+                    NotFile,
+                    IndexOutOfLogic)
 from board import Board
-from main import show_game_logic
 from gamers import player, bot
 
 
@@ -66,9 +61,9 @@ def test_create_game_logic():
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
         ]
-    
 
-def test_make_attack():
+
+def test_bot_make_attack():
     player.logic = [
         [' ', ' ', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', 'O', 'O'],
@@ -81,11 +76,68 @@ def test_make_attack():
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
         ]
-    bot.make_attack(player.grid, player.logic)
-    
+
+    # miss
+    bot.make_attack(player.grid, player.logic, 0, 1)
+
+    assert player.logic == [
+        [' ', 'X', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', 'O', 'O'],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', 'O', 'O', 'O', 'O', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        ]
+
+    # hit
+    bot.make_attack(player.grid, player.logic, 2, 2)
+
+    assert player.logic == [
+        [' ', 'X', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', 'O', 'O'],
+        [' ', ' ', 'H', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', 'O', 'O', 'O', 'O', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        ]
+
+    # repeat
+    bot.make_attack(player.grid, player.logic, 2, 2)
+
+    assert player.logic == [
+        [' ', 'X', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', 'O', 'O'],
+        [' ', ' ', 'H', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', 'O', 'O', 'O', 'O', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        ]
 
 
-
-
-def test_show_game_logic():
-    pass
+def test_bot_make_attack_out_of_array():
+    player.logic = [
+        [' ', ' ', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', 'O', 'O'],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', 'O', 'O', 'O', 'O', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        ]
+    with pytest.raises(IndexOutOfLogic):
+        bot.make_attack(player.grid, player.logic, 11, 12)

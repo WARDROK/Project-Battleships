@@ -6,9 +6,7 @@ Oraz mam pytanie odnośnie konsultacji. Czy byłaby możliwość spotkania zdaln
 
 Do zrobienia:
 testy:
-show_game_logic()
 clean_logic()
-make_attack()
 
 typing hints and docstrings
 

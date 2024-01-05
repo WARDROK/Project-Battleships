@@ -4,6 +4,7 @@ import numpy as np
 from board import Board, Token
 from ships import create_fleet
 from settings import ROWS, COLUMNS, CELL_SIZE, SCREEN_WIDTH
+from errors import IndexOutOfLogic
 
 
 class Gamer:
@@ -147,44 +148,49 @@ class Bot(Gamer):
                         else:
                             return (pos[0], pos[1])
 
-    def make_attack(self, grid, logic):
+    def make_attack(self, grid, logic, row: int = None, col: int = None):
         """
         Function to change board logic
         """
-        np_logic = np.array(logic)
-        valid_choice = False
-        if self.find_target(np_logic):
-            target = self.find_target(np_logic)
-            row = target[0]
-            col = target[1]
-            valid_choice = True
-
-        while not valid_choice:
-            row = random.randint(0, ROWS - 1)
-            col = random.randint(0, COLUMNS - 1)
-            if logic[row][col] == ' ':
-                aroundX = True
-                if row - 1 >= 0 and not\
-                        (logic[row - 1][col] == 'X'):
-                    aroundX = False
-                elif row + 1 <= (ROWS - 1) and not\
-                        (logic[row + 1][col] == 'X'):
-                    aroundX = False
-                elif col - 1 >= 0 and not\
-                        (logic[row][col - 1] == 'X'):
-                    aroundX = False
-                elif col + 1 <= (COLUMNS - 1) and not\
-                        (logic[row][col + 1] == 'X'):
-                    aroundX = False
-                valid_choice = not aroundX
-            if logic[row][col] == 'O':
+        if row is None and col is None:
+            np_logic = np.array(logic)
+            valid_choice = False
+            if self.find_target(np_logic):
+                target = self.find_target(np_logic)
+                row = target[0]
+                col = target[1]
                 valid_choice = True
 
+            while not valid_choice:
+                row = random.randint(0, ROWS - 1)
+                col = random.randint(0, COLUMNS - 1)
+                if logic[row][col] == ' ':
+                    aroundX = True
+                    if row - 1 >= 0 and not\
+                            (logic[row - 1][col] == 'X'):
+                        aroundX = False
+                    elif row + 1 <= (ROWS - 1) and not\
+                            (logic[row + 1][col] == 'X'):
+                        aroundX = False
+                    elif col - 1 >= 0 and not\
+                            (logic[row][col - 1] == 'X'):
+                        aroundX = False
+                    elif col + 1 <= (COLUMNS - 1) and not\
+                            (logic[row][col + 1] == 'X'):
+                        aroundX = False
+                    valid_choice = not aroundX
+                if logic[row][col] == 'O':
+                    valid_choice = True
+
+        if row < 0 or row > ROWS - 1 or col < 0 or col > COLUMNS - 1:
+            raise IndexOutOfLogic()
         if logic[row][col] == 'O':
             print("Bot hit player's ship")
             logic[row][col] = 'H'
             self.tokens.append(Token('images/redtoken.png', grid[row][col]))
             self.turn = False
+        elif logic[row][col] == 'X' or logic[row][col] == 'H':
+            self.turn = True
         else:
             print('Bot miss')
             logic[row][col] = 'X'

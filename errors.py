@@ -34,3 +34,8 @@ class NotFile(Exception):
         super().__init__("\nCannot find file: 'screen_resolution.txt'\n\
 'screen_resolution.txt' was created with default settings\n\
 You can restart with default settings or set your own")
+
+
+class IndexOutOfLogic(Exception):
+    def __init__(self) -> None:
+        super().__init__("Entered wrong index")
