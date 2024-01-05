@@ -45,7 +45,7 @@ class Button:
         if self.center:
             font = pygame.font.SysFont('Sans', round(scale(36)))
         else:
-            font = pygame.font.SysFont('Sans', round(scale(20)))
+            font = pygame.font.SysFont('Sans', round(scale(24)))
         return font.render(msg, 1, (255, 255, 255))
 
     def focus_on_button(self, window):
@@ -89,13 +89,13 @@ class Button:
         window.blit(self.msg, self.msg_rect)
 
 
-BUTTON_IMAGE = load_image('images/button.png', (scale(150), scale(50)))
+BUTTON_IMAGE = load_image('images/button.png', (scale(150), scale(75)))
 BUTTONS = [
-    Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Randomize'),
-    Button(BUTTON_IMAGE, (150, 50), (200, 900), 'Reset'),
-    Button(BUTTON_IMAGE, (150, 50), (375, 900), 'Deploy'),
-    Button(BUTTON_IMAGE, (150, 50), (25, 900), 'Menu'),
-    Button(BUTTON_IMAGE, (150, 50), (1745, 900), 'Quit'),
+    Button(BUTTON_IMAGE, (150, 75), (25, 900), 'Randomize'),
+    Button(BUTTON_IMAGE, (150, 75), (200, 900), 'Reset'),
+    Button(BUTTON_IMAGE, (150, 75), (375, 900), 'Deploy'),
+    Button(BUTTON_IMAGE, (150, 75), (25, 900), 'Menu'),
+    Button(BUTTON_IMAGE, (150, 75), (1745, 900), 'Quit'),
     Button(BUTTON_IMAGE, (300, 100), (0, 0), 'Start Game', center=True)
 ]
 
