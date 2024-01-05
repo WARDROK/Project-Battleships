@@ -18,7 +18,7 @@ class Ship:
     :param size: ships's size (x, y)
     :type size: tuple
     """
-    def __init__(self, name, image, position, size):
+    def __init__(self, name, image, position, size) -> None:
         self.name = name
         self.position = position
         # Vertical image
@@ -113,7 +113,8 @@ class Ship:
         self.rect.topleft = self.position
         self.set_center_point()
 
-    def align_to_grid_edge(self, grid_coords: list[list[float]]) -> None:
+    def align_to_grid_edge(self,
+                           grid_coords: list[list[tuple[float]]]) -> None:
         """
         Adjust ship position to the game grid edge
         """
@@ -140,7 +141,7 @@ class Ship:
                self.rect.top < grid_coords[0][0][1] - CELL_SIZE:
                 self.return_to_default_potition()
 
-    def align_to_grid(self, grid_coords: list[list[float]]) -> None:
+    def align_to_grid(self, grid_coords: list[list[tuple[float]]]) -> None:
         """
         Adjust ship position to the game grid
         """
