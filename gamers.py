@@ -99,15 +99,16 @@ class Player(Gamer):
                     if pos_x >= col[0] and pos_x <= col[0] + CELL_SIZE and \
                        pos_y >= col[1] and pos_y <= col[1] + CELL_SIZE:
                         if logic[i][j] == 'H' or logic[i][j] == 'X':
-                            print("'Don't repeat shoot in the same place")
+                            self.turn = True
+                            # print("'Don't repeat shoot in the same place")
                         elif logic[i][j] != ' ' or logic[i][j] == 'O':
-                            print("Player hit enemy's ship")
+                            # print("Player hit enemy's ship")
                             logic[i][j] = 'H'
                             self.tokens.append(Token('images/redtoken.png',
                                                      (col)))
                             self.turn = False
                         else:
-                            print('Player miss')
+                            # print('Player miss')
                             logic[i][j] = 'X'
                             self.tokens.append(Token('images/bluetoken.png',
                                                      (col)))
@@ -185,14 +186,14 @@ class Bot(Gamer):
         if row < 0 or row > ROWS - 1 or col < 0 or col > COLUMNS - 1:
             raise IndexOutOfLogic()
         if logic[row][col] == 'O':
-            print("Bot hit player's ship")
+            # print("Bot hit player's ship")
             logic[row][col] = 'H'
             self.tokens.append(Token('images/redtoken.png', grid[row][col]))
             self.turn = False
         elif logic[row][col] == 'X' or logic[row][col] == 'H':
             self.turn = True
         else:
-            print('Bot miss')
+            # print('Bot miss')
             logic[row][col] = 'X'
             self.tokens.append(Token('images/bluetoken.png', grid[row][col]))
             self.turn = False

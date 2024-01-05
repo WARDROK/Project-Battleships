@@ -92,6 +92,11 @@ def select_ship_and_move(ship):
                     ship.rotate_ship()
 
 
+dev = False
+# change to True,
+# if you want use show_game_logic()
+# by middle mouse button
+
 # Main Game Loop
 if __name__ == "__main__":
     game_run = True
@@ -120,7 +125,7 @@ if __name__ == "__main__":
                                 game_phase = False
                                 player_win = True
                                 end_game = True
-                                print('Player won')
+                                # print('Player won')
                             elif not player.turn:
                                 bot.turn = True
                         if bot.turn:
@@ -129,7 +134,7 @@ if __name__ == "__main__":
                                 game_phase = False
                                 player_defeat = True
                                 end_game = True
-                                print('Player defeat')
+                                # print('Player defeat')
                             elif not bot.turn:
                                 player.turn = True
 
@@ -171,8 +176,10 @@ if __name__ == "__main__":
                                 start_phase = False
                                 deployment_phase = True
                 # Show game logic in terminal, when middle mouse button clicked
-                if event.button == 2:
-                    show_game_logic()
+                # and when dev == True
+                if dev:
+                    if event.button == 2:
+                        show_game_logic()
 
         update_game_screen(GAME_SCREEN)
 
