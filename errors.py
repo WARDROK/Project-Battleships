@@ -1,5 +1,5 @@
 class LowWidthResolution(Exception):
-    def __init__(self, width) -> None:
+    def __init__(self, width: int) -> None:
         super().__init__(
             f"\nWidth resolution must be minimum 800. Entered: {width}\n\
 'screen_resolution.txt' was set to default\n\
@@ -9,7 +9,7 @@ or set your own with correct data")
 
 
 class LowHeightResolution(Exception):
-    def __init__(self, height) -> None:
+    def __init__(self, height: int) -> None:
         super().__init__(
             f"\nHeight resolution must be minimum 600. Entered: {height}\n\
 'screen_resolution.txt' was set to default\n\
