@@ -1,14 +1,14 @@
 import pygame
 from settings import load_image, scale, SCREEN_HEIGHT, SCREEN_WIDTH
-from gamers import player
+from gamers import Player, player
 
 
 class Button:
     """
     Create instance of button. Contains attributes:
 
-    :param image: button's image path
-    :type image: str
+    :param image: button's image surface
+    :type image: pygame.surface.Surface
 
     :param size: button's size (x, y)
     :type size: tuple
@@ -19,7 +19,8 @@ class Button:
     :param msg: button's message
     :type msg: str
     """
-    def __init__(self, image, size, pos, msg, center=False):
+    def __init__(self, image: pygame.surface.Surface, size: tuple[float],
+                 pos: tuple[float], msg: str, center: bool = False) -> None:
         self.center = center
         self.name = msg
         self.image = image
@@ -38,7 +39,7 @@ class Button:
         self.msg = self.add_text(msg)
         self.msg_rect = self.msg.get_rect(center=self.rect.center)
 
-    def add_text(self, msg):
+    def add_text(self, msg: str) -> pygame.surface.Surface:
         """
         Add text to button
         """
@@ -48,7 +49,7 @@ class Button:
             font = pygame.font.SysFont('Sans', round(scale(24)))
         return font.render(msg, 1, (255, 255, 255))
 
-    def focus_on_button(self, window):
+    def focus_on_button(self, window: pygame.surface.Surface) -> None:
         """
         Larger image when mouse focus on button
         """
@@ -59,7 +60,7 @@ class Button:
         else:
             window.blit(self.image, self.rect)
 
-    def action_on_press(self):
+    def action_on_press(self) -> None:
         """
         Make button actions when clicked
         """
@@ -68,20 +69,20 @@ class Button:
         elif self.name == 'Reset':
             self.reset(player.fleet)
 
-    def randomize(self, player):
+    def randomize(self, player: Player) -> None:
         """
         Call random ship placement fucntion
         """
         player.random_ships_placement()
 
-    def reset(self, ship_list):
+    def reset(self, ship_list: list[object]) -> None:
         """
         Set ships on default positions
         """
         for ship in ship_list:
             ship.return_to_default_potition()
 
-    def draw(self, window):
+    def draw(self, window: pygame.surface.Surface) -> None:
         """
         Draw button on screen
         """
@@ -89,14 +90,15 @@ class Button:
         window.blit(self.msg, self.msg_rect)
 
 
-BUTTON_IMAGE = load_image('images/button.png', (scale(150), scale(75)))
-BUTTONS = [
-    Button(BUTTON_IMAGE, (150, 75), (25, 900), 'Randomize'),
-    Button(BUTTON_IMAGE, (150, 75), (200, 900), 'Reset'),
-    Button(BUTTON_IMAGE, (150, 75), (375, 900), 'Deploy'),
-    Button(BUTTON_IMAGE, (150, 75), (25, 900), 'Menu'),
-    Button(BUTTON_IMAGE, (150, 75), (1745, 900), 'Quit'),
-    Button(BUTTON_IMAGE, (300, 100), (0, 0), 'Start Game', center=True)
-]
+if __name__ == 'buttons':
+    BUTTON_IMAGE = load_image('images/button.png', (scale(150), scale(75)))
+    BUTTONS = [
+        Button(BUTTON_IMAGE, (150, 75), (25, 900), 'Randomize'),
+        Button(BUTTON_IMAGE, (150, 75), (200, 900), 'Reset'),
+        Button(BUTTON_IMAGE, (150, 75), (375, 900), 'Deploy'),
+        Button(BUTTON_IMAGE, (150, 75), (25, 900), 'Menu'),
+        Button(BUTTON_IMAGE, (150, 75), (1745, 900), 'Quit'),
+        Button(BUTTON_IMAGE, (300, 100), (0, 0), 'Start Game', center=True)
+    ]
 
-deployment_phase_button = ['Randomize', 'Reset', 'Deploy']
+    deployment_phase_button = ['Randomize', 'Reset', 'Deploy']
