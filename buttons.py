@@ -1,6 +1,7 @@
 import pygame
 from settings import load_image, scale, SCREEN_HEIGHT, SCREEN_WIDTH
 from gamers import Player, player
+from typing import Tuple, List
 
 
 class Button:
@@ -19,8 +20,10 @@ class Button:
     :param msg: button's message
     :type msg: str
     """
-    def __init__(self, image: pygame.surface.Surface, size: tuple[float],
-                 pos: tuple[float], msg: str, center: bool = False) -> None:
+    def __init__(self, image: pygame.surface.Surface,
+                 size: Tuple[float, float],
+                 pos: Tuple[float, float],
+                 msg: str, center: bool = False) -> None:
         self.center = center
         self.name = msg
         self.image = image
@@ -75,7 +78,7 @@ class Button:
         """
         player.random_ships_placement()
 
-    def reset(self, ship_list: list[object]) -> None:
+    def reset(self, ship_list: List[object]) -> None:
         """
         Set ships on default positions
         """

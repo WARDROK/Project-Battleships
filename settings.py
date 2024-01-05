@@ -1,6 +1,7 @@
 import pygame
 from errors import (LowWidthResolution, LowHeightResolution,
                     WrongResolutionData, NotFile)
+from typing import Tuple
 
 
 def set_default_resolution(screen_width: str = '1280',
@@ -14,7 +15,7 @@ def set_default_resolution(screen_width: str = '1280',
 
 def read_resolution(screen_width: str = None,
                     screen_height: str = None,
-                    file: str = None) -> tuple[str, str]:
+                    file: str = None) -> Tuple[str, str]:
     """
     Read resolution from file[default: 'screen_resolution.txt']
     """
@@ -56,7 +57,7 @@ if __name__ == 'settings':
     pygame.display.set_caption('Battleships')
 
     def load_image(path: str,
-                   size: tuple[float, float],
+                   size: Tuple[float, float],
                    roatate=False) -> pygame.surface.Surface:
         """
         Function to import images

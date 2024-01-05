@@ -1,5 +1,6 @@
 import pygame
 from settings import CELL_SIZE, load_image
+from typing import Tuple, List
 
 
 class Board:
@@ -19,7 +20,7 @@ class Board:
     :type position: tuple
     """
     def __init__(self, rows: int, columns: int,
-                 cell_size: int, position: tuple[float]) -> None:
+                 cell_size: int, position: Tuple[float, float]) -> None:
         self.rows = rows
         self.columns = columns
         self.cell_size = cell_size
@@ -27,7 +28,7 @@ class Board:
         self.grid = self.create_grid()
         self.logic = self.create_game_logic()
 
-    def create_grid(self) -> list[list[tuple[float]]]:
+    def create_grid(self) -> List[List[Tuple[float, float]]]:
         """
         Create a game grid
         """
@@ -44,7 +45,7 @@ class Board:
             start_y += self.cell_size
         return grid
 
-    def create_game_logic(self) -> list[list[str]]:
+    def create_game_logic(self) -> List[List[str]]:
         """
         Create game grid with logic
         ' ' - spaces
@@ -81,7 +82,7 @@ class Token:
     :param pos: token's position
     :type pos: tuple
     """
-    def __init__(self, image: str, pos: tuple[float]) -> None:
+    def __init__(self, image: str, pos: Tuple[float, float]) -> None:
         self.image = load_image(image, (CELL_SIZE, CELL_SIZE))
         self.pos = pos
         self.rect = self.image.get_rect()

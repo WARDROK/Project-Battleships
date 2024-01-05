@@ -5,6 +5,7 @@ from board import Board, Token
 from ships import Ship
 from settings import ROWS, COLUMNS, CELL_SIZE, SCREEN_WIDTH
 from errors import IndexOutOfLogic
+from typing import Tuple, List
 
 
 class Gamer:
@@ -87,8 +88,8 @@ class Player(Gamer):
     :type image: Board
     """
 
-    def make_attack(self, grid: list | list | tuple | float,
-                    logic: list | list | str) -> None:
+    def make_attack(self, grid: List[List[Tuple[float, float]]],
+                    logic: List[List[str]]) -> None:
         """
         Function to change board logic
         """
@@ -123,7 +124,7 @@ class Bot(Gamer):
     :param board: bot's board
     :type borad: Board
     """
-    def find_target(self, logic: np.ndarray) -> tuple | float:
+    def find_target(self, logic: np.ndarray) -> Tuple[float, float]:
         for row in range(ROWS):
             for col in range(COLUMNS):
                 if logic[row, col] == 'H':
@@ -150,8 +151,8 @@ class Bot(Gamer):
                         else:
                             return (pos[0], pos[1])
 
-    def make_attack(self, grid: list | list | tuple | float,
-                    logic: list | list | str,
+    def make_attack(self, grid: List[List[Tuple[float, float]]],
+                    logic: List[List[str]],
                     row: int = None, col: int = None) -> None:
         """
         Function to change board logic

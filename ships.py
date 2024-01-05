@@ -1,5 +1,6 @@
 import pygame
 from settings import CELL_SIZE, FLEET, load_image
+from typing import Tuple, List
 
 
 class Ship:
@@ -19,8 +20,8 @@ class Ship:
     :type size: tuple
     """
     def __init__(self, name: str, image: str,
-                 position: tuple[float],
-                 size: tuple[float]) -> None:
+                 position: Tuple[float, float],
+                 size: Tuple[float, float]) -> None:
         self.name = name
         self.position = position
         # Vertical image
@@ -43,7 +44,7 @@ class Ship:
         self.active = False
 
     @classmethod
-    def create_fleet(cls) -> list[object]:
+    def create_fleet(cls) -> List[object]:
         """
         Create fleet of ships
         """
@@ -116,7 +117,8 @@ class Ship:
         self.set_center_point()
 
     def align_to_grid_edge(self,
-                           grid_coords: list[list[tuple[float]]]) -> None:
+                           grid_coords: List[List[Tuple[float, float]]]
+                           ) -> None:
         """
         Adjust ship position to the game grid edge
         """
@@ -143,7 +145,8 @@ class Ship:
                self.rect.top < grid_coords[0][0][1] - CELL_SIZE:
                 self.return_to_default_potition()
 
-    def align_to_grid(self, grid_coords: list[list[tuple[float]]]) -> None:
+    def align_to_grid(self,
+                      grid_coords: List[List[Tuple[float, float]]]) -> None:
         """
         Adjust ship position to the game grid
         """
