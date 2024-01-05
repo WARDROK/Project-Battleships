@@ -1,12 +1,6 @@
 1. czy dać requirements.txt pygame?
 
-Dzień dobry. Mam pytanie odnośnie projektu. Jeśli korzystam z niestandardowej bibiloteki pygame
-to wystarczy jedynie opisać ten fakt w dokumentacji? 
-Oraz mam pytanie odnośnie konsultacji. Czy byłaby możliwość spotkania zdalnie po 20:00 w środę lub w piątek przed 18:00?
-
 Do zrobienia:
-testy:
-clean_logic()
 
 typing hints and docstrings
 
