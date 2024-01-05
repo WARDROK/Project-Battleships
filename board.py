@@ -19,7 +19,7 @@ class Board:
     :type position: tuple
     """
     def __init__(self, rows: int, columns: int,
-                 cell_size: int, position: tuple) -> None:
+                 cell_size: int, position: tuple[float]) -> None:
         self.rows = rows
         self.columns = columns
         self.cell_size = cell_size
@@ -81,7 +81,7 @@ class Token:
     :param pos: token's position
     :type pos: tuple
     """
-    def __init__(self, image: str, pos: tuple) -> None:
+    def __init__(self, image: str, pos: tuple[float]) -> None:
         self.image = load_image(image, (CELL_SIZE, CELL_SIZE))
         self.pos = pos
         self.rect = self.image.get_rect()

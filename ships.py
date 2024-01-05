@@ -18,7 +18,9 @@ class Ship:
     :param size: ships's size (x, y)
     :type size: tuple
     """
-    def __init__(self, name, image, position, size) -> None:
+    def __init__(self, name: str, image: str,
+                 position: tuple[float],
+                 size: tuple[float]) -> None:
         self.name = name
         self.position = position
         # Vertical image
