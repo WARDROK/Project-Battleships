@@ -55,11 +55,12 @@ class Ship:
             )
         return fleet
 
-    def set_center_point():
+    def set_center_point(self):
         """
         Set ships's center point
         """
-        pass
+        self.h_image_rect.center = self.rect.center
+        self.v_image_rect.center = self.rect.center
 
     def rotate_ship(self):
         """
@@ -81,8 +82,7 @@ class Ship:
         else:
             self.image = self.v_image
             self.rect = self.v_image_rect
-        self.h_image_rect.center = self.rect.center
-        self.v_image_rect.center = self.rect.center
+        self.set_center_point()
 
     def draw(self, window):
         """
@@ -111,8 +111,7 @@ class Ship:
         if self.rotation is True:
             self.rotate_ship()
         self.rect.topleft = self.position
-        self.h_image_rect.center = self.rect.center
-        self.v_image_rect.center = self.rect.center
+        self.set_center_point()
 
     def align_to_grid_edge(self, grid_coords):
         """
@@ -135,8 +134,7 @@ class Ship:
                 self.rect.top = grid_coords[0][0][1]
             elif self.rect.bottom > grid_coords[-1][0][1] + CELL_SIZE:
                 self.rect.bottom = grid_coords[-1][0][1] + CELL_SIZE
-            self.h_image_rect.center = self.rect.center
-            self.v_image_rect.center = self.rect.center
+            self.set_center_point()
 
             if self.rect.bottom > grid_coords[-1][0][1] + CELL_SIZE or \
                self.rect.top < grid_coords[0][0][1] - CELL_SIZE:
@@ -158,5 +156,4 @@ class Ship:
                         self.rect.topleft = (cell[0] + correct_width, cell[1])
                     else:
                         self.rect.topleft = (cell[0], cell[1] + correct_height)
-        self.h_image_rect.center = self.rect.center
-        self.v_image_rect.center = self.rect.center
+        self.set_center_point()
