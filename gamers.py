@@ -2,7 +2,7 @@ import pygame
 import random
 import numpy as np
 from board import Board, Token
-from ships import create_fleet
+from ships import Ship
 from settings import ROWS, COLUMNS, CELL_SIZE, SCREEN_WIDTH
 from errors import IndexOutOfLogic
 
@@ -16,7 +16,7 @@ class Gamer:
     """
     def __init__(self, board: Board):
         self.board = board
-        self.fleet = create_fleet()
+        self.fleet = Ship.create_fleet()
         self.grid = self.board.grid
         self.logic = self.clean_logic()
         self.turn = False

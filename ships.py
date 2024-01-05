@@ -1,34 +1,5 @@
 import pygame
-from settings import CELL_SIZE, load_image, scale
-
-
-def create_fleet():
-    """
-    Create fleet of ships
-    """
-    fleet = []
-    for name in FLEET.keys():
-        fleet.append(
-            Ship(name,
-                 FLEET[name][1],
-                 FLEET[name][2],
-                 FLEET[name][3])
-        )
-    return fleet
-
-
-FLEET = {
-    'carrier': ['carrier', 'images/carrier.png',
-                (scale(50), scale(600)), (scale(45), scale(245))],
-    'battleship': ['battleship', 'images/battleship.png',
-                   (scale(125), scale(600)), (scale(30), scale(195))],
-    'cruiser': ['cruiser', 'images/cruiser.png',
-                (scale(200), scale(600)), (scale(30), scale(145))],
-    'destroyer': ['destroyer', 'images/destroyer.png',
-                  (scale(275), scale(600)), (scale(30), scale(145))],
-    'submarine': ['submarine', 'images/submarine.png',
-                  (scale(350), scale(600)), (scale(30), scale(95))],
-}
+from settings import CELL_SIZE, FLEET, load_image
 
 
 class Ship:
@@ -68,6 +39,21 @@ class Ship:
         self.rotation = False
         # Ship is active select
         self.active = False
+
+    @classmethod
+    def create_fleet(cls) -> list:
+        """
+        Create fleet of ships
+        """
+        fleet = []
+        for name in FLEET.keys():
+            fleet.append(
+                cls(name,
+                    FLEET[name][1],
+                    FLEET[name][2],
+                    FLEET[name][3])
+            )
+        return fleet
 
     def set_center_point():
         """

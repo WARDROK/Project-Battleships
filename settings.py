@@ -84,3 +84,16 @@ if __name__ == 'settings':
     PLAYER_WIN = load_image('images/player_win.jpg',
                             (SCREEN_WIDTH, SCREEN_HEIGHT))
     DEFEAT = load_image('images/defeat.jpg', (SCREEN_WIDTH, SCREEN_HEIGHT))
+
+    FLEET = {
+        'carrier': ['carrier', 'images/carrier.png',
+                    (scale(50), scale(600)), (scale(45), scale(245))],
+        'battleship': ['battleship', 'images/battleship.png',
+                       (scale(125), scale(600)), (scale(30), scale(195))],
+        'cruiser': ['cruiser', 'images/cruiser.png',
+                    (scale(200), scale(600)), (scale(30), scale(145))],
+        'destroyer': ['destroyer', 'images/destroyer.png',
+                      (scale(275), scale(600)), (scale(30), scale(145))],
+        'submarine': ['submarine', 'images/submarine.png',
+                      (scale(350), scale(600)), (scale(30), scale(95))],
+    }
