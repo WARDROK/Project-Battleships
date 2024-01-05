@@ -14,7 +14,7 @@ class Gamer:
     :param image: gamer's board
     :type image: Board
     """
-    def __init__(self, board: Board):
+    def __init__(self, board: Board) -> None:
         self.board = board
         self.fleet = Ship.create_fleet()
         self.grid = self.board.grid
@@ -22,13 +22,13 @@ class Gamer:
         self.turn = False
         self.tokens = []
 
-    def clean_logic(self):
+    def clean_logic(self) -> None:
         """
         Set empty logic
         """
         self.logic = self.board.create_game_logic()
 
-    def random_ships_placement(self):
+    def random_ships_placement(self) -> None:
         """
         Random locate ships on the game grid
         """
@@ -61,9 +61,9 @@ class Gamer:
                 ship.align_to_grid_edge(self.grid)
             placed_ships.append(ship)
 
-    def update_game_logic(self):
+    def update_game_logic(self) -> None:
         """
-        Update game grid with position of the ships
+        Update game logic with position of the ships
         """
         grid_coords = self.grid
         game_logic = self.logic
@@ -87,7 +87,8 @@ class Player(Gamer):
     :type image: Board
     """
 
-    def make_attack(self, grid, logic):
+    def make_attack(self, grid: list | list | tuple | float,
+                    logic: list | list | str) -> None:
         """
         Function to change board logic
         """
@@ -122,7 +123,7 @@ class Bot(Gamer):
     :param board: bot's board
     :type borad: Board
     """
-    def find_target(self, logic: np.ndarray):
+    def find_target(self, logic: np.ndarray) -> tuple | float:
         for row in range(ROWS):
             for col in range(COLUMNS):
                 if logic[row, col] == 'H':
@@ -149,7 +150,9 @@ class Bot(Gamer):
                         else:
                             return (pos[0], pos[1])
 
-    def make_attack(self, grid, logic, row: int = None, col: int = None):
+    def make_attack(self, grid: list | list | tuple | float,
+                    logic: list | list | str,
+                    row: int = None, col: int = None) -> None:
         """
         Function to change board logic
         """
