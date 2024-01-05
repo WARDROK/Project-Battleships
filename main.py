@@ -6,9 +6,10 @@ from settings import (GAME_SCREEN, START_BG, GAME_BG,
                       SHIPS_ZONE_POS, PLAYER_WIN, DEFEAT)
 from buttons import BUTTONS, deployment_phase_button
 from gamers import player, bot
+from ships import Ship
 
 
-def show_game_logic():
+def show_game_logic() -> None:
     """
     Show game logic in terminal
     """
@@ -20,7 +21,7 @@ def show_game_logic():
         print(_)
 
 
-def update_game_screen(window):
+def update_game_screen(window: pygame.surface.Surface) -> None:
     """
     Function to update screen
     """
@@ -72,7 +73,7 @@ def update_game_screen(window):
 
 
 # Initial player's ships position
-def select_ship_and_move(ship):
+def select_ship_and_move(ship: Ship) -> None:
     """
     Select ship and move it to mouse position
     """
