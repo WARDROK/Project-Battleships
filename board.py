@@ -19,7 +19,7 @@ class Board:
     :type position: tuple
     """
     def __init__(self, rows: int, columns: int,
-                 cell_size: int, position: tuple):
+                 cell_size: int, position: tuple) -> None:
         self.rows = rows
         self.columns = columns
         self.cell_size = cell_size
@@ -27,7 +27,7 @@ class Board:
         self.grid = self.create_grid()
         self.logic = self.create_game_logic()
 
-    def create_grid(self):
+    def create_grid(self) -> list[list[tuple[float]]]:
         """
         Create a game grid
         """
@@ -44,7 +44,7 @@ class Board:
             start_y += self.cell_size
         return grid
 
-    def create_game_logic(self):
+    def create_game_logic(self) -> list[list[str]]:
         """
         Create game grid with logic
         ' ' - spaces
@@ -60,7 +60,7 @@ class Board:
             game_logic.append(row_x)
         return game_logic
 
-    def show_grid_on_screen(self, window):
+    def show_grid_on_screen(self, window: pygame.surface.Surface) -> None:
         """
         Show player and bot grids on screen
         """
@@ -87,7 +87,7 @@ class Token:
         self.rect = self.image.get_rect()
         self.rect.topleft = self.pos
 
-    def draw(self, window):
+    def draw(self, window: pygame.surface.Surface) -> None:
         """
         Draw token on screen
         """
