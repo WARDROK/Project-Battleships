@@ -5,11 +5,14 @@
 # resolution errors 4
 # make_attack()
 import pytest
+from settings import read_resolution
 from errors import (LowHeightResolution,
                     LowWidthResolution,
                     WrongResolutionData,
                     NotFile)
-from settings import read_resolution
+from board import Board
+from main import show_game_logic
+from gamers import player, bot
 
 
 def test_read_resolution():
@@ -46,3 +49,43 @@ def test_read_resolution_without_initial_text():
 def test_read_resolution_not_file():
     with pytest.raises(NotFile):
         read_resolution(file="test.txt")
+
+
+def test_create_game_logic():
+    board = Board(10, 10, 50, (0, 0))
+    game_logic = board.create_game_logic()
+    assert game_logic == [
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        ]
+    
+
+def test_make_attack():
+    player.logic = [
+        [' ', ' ', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', 'O', ' ', ' ', 'O', 'O', 'O'],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', 'O', ' '],
+        [' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', 'O', 'O', 'O', 'O', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        ]
+    bot.make_attack(player.grid, player.logic)
+    
+
+
+
+
+def test_show_game_logic():
+    pass
