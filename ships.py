@@ -41,7 +41,7 @@ class Ship:
         self.active = False
 
     @classmethod
-    def create_fleet(cls) -> list:
+    def create_fleet(cls) -> list[object]:
         """
         Create fleet of ships
         """
@@ -55,14 +55,14 @@ class Ship:
             )
         return fleet
 
-    def set_center_point(self):
+    def set_center_point(self) -> None:
         """
         Set ships's center point
         """
         self.h_image_rect.center = self.rect.center
         self.v_image_rect.center = self.rect.center
 
-    def rotate_ship(self):
+    def rotate_ship(self) -> None:
         """
         Change ship rotation(vertical or horizontal)
         """
@@ -72,7 +72,7 @@ class Ship:
             self.rotation = False
         self.rotate_image()
 
-    def rotate_image(self):
+    def rotate_image(self) -> None:
         """
         Change image (vertical or horizontal)
         """
@@ -84,7 +84,7 @@ class Ship:
             self.rect = self.v_image_rect
         self.set_center_point()
 
-    def draw(self, window):
+    def draw(self, window: pygame.surface.Surface) -> None:
         """
         Draw ship on screen
         """
@@ -93,7 +93,7 @@ class Ship:
         # red line around ships
         # pygame.draw.rect(window, (255, 0, 0), self.rect, 1)
 
-    def check_collision(self, ship_list):
+    def check_collision(self, ship_list: list[object]) -> bool:
         """
         Check if ship is colliding with others ships
         """
@@ -104,7 +104,7 @@ class Ship:
                 return True
         return False
 
-    def return_to_default_potition(self):
+    def return_to_default_potition(self) -> None:
         """
         Return ship to default position
         """
@@ -113,7 +113,7 @@ class Ship:
         self.rect.topleft = self.position
         self.set_center_point()
 
-    def align_to_grid_edge(self, grid_coords):
+    def align_to_grid_edge(self, grid_coords: list[list[float]]) -> None:
         """
         Adjust ship position to the game grid edge
         """
@@ -140,7 +140,7 @@ class Ship:
                self.rect.top < grid_coords[0][0][1] - CELL_SIZE:
                 self.return_to_default_potition()
 
-    def align_to_grid(self, grid_coords):
+    def align_to_grid(self, grid_coords: list[list[float]]) -> None:
         """
         Adjust ship position to the game grid
         """
