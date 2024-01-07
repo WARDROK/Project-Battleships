@@ -168,6 +168,8 @@ Następnie wpisać komendę:
 python3 main.py
 ```
 
+W razie problemu nie znalezienia polecenia python, wpisz `python` zamiast `python3`
+
 ---
 
 ### Wykorzytane moduły
@@ -242,9 +244,9 @@ Minimalna rozdzielczość: 800x600
 - Co udało się osiągnąć:
   - Stworzono w pełni działającą grę statki z interfejsem graficznym.
 - Rzeczy, które nie zostały zrealizowane, z komentarzem dlaczego.
-  - Nie dopracoano funkcji load_image() znajdującej się w pliku settings.py która przez implementację w złym miejscu już podczas importowania settings.py inicjalizuje ekran gry. Zabrakło czasu na refaktoryzcję kodu poprzez umieszcznie funckji i zładowanie wszytkich grafik w main.py
+  - Nie dopracowano funkcji load_image() znajdującej się w pliku settings.py która przez implementację w złym miejscu już podczas importowania settings.py inicjalizuje ekran gry. Zabrakło czasu na refaktoryzcję kodu poprzez umieszcznie funckji i zładowanie wszytkich grafik w main.py
 - Przeszkody napotkane podczas projektu i jak zostały one przezwyciężone.
-  - Funkcja która ma na celu dopasowanie statku do planszy, gdy jego fragment w momencie ustawiania wystawał poza planszę nie została idealnie dopracowana. Nie udało się rozwiązać dopasowania do planszy w przypadku, gdy statek jest w większości poza planszą, a dotyka jedynie rogu planszy, gdyż statek ustawiał się w taki sposób, że wystwał poza planszę. W tej sytuacji zdecydowałem się, że w takim przypadku statek powróci na swoją domyślną pozycję i będzie możliwy do ponownego ustawienia.
+  - Funkcja która ma na celu dopasowanie statku do planszy, gdy jego fragment w momencie ustawiania wystawał poza planszę nie została idealnie dopracowana. Nie udało się rozwiązać dopasowania do planszy w przypadku, gdy statek jest w większości poza planszą, a dotyka jedynie rogu planszy, gdyż statek ustawiał się w taki sposób, że wystwał poza planszę. W tej sytuacji zdecydowałem się, że statek powróci na swoją domyślną pozycję i będzie możliwy do ponownego ustawienia.
 - Zmiany w stosunku do pierwotnego planu rozwiązania.
   - Pierwtotnie statki miały być rozstawiane bez możliwości sąsiadowania ze sobą. Jednakże przez ograniczoną ilość czasu zrezygnowałem z tej opcji.
 
