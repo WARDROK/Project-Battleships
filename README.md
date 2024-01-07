@@ -10,7 +10,9 @@
     - [Opis Projektu](#opis-projektu)
       - [Instrukcja Gracza](#instrukcja-gracza)
       - [Funkcje Komputera](#funkcje-komputera)
-  - [Podział Programu na Klasy i Opis Klas](#podział-programu-na-klasy-i-opis-klas)
+  - [Podział Programu na Klasy i Metody](#podział-programu-na-klasy-i-metody)
+    - [Klasy](#klasy)
+    - [Metody](#metody)
   - [Instrukcja Użytkownika](#instrukcja-użytkownika)
     - [Wykorzytane moduły](#wykorzytane-moduły)
     - [Instalacja niebędnych modułów](#instalacja-niebędnych-modułów)
@@ -68,17 +70,93 @@ Gra w statki to klasyczna gra strategiczna, w której dwaj gracze umieszczają s
 3. **Odkrywanie Reszty Statku:**
    - Po trafieniu komputer stara się odkryć resztę statku, strzelając w pionie lub poziomie.
 
-![Menu Start](images/game.png)
+![Game](images/game.png)
 
-## Podział Programu na Klasy i Opis Klas
+## Podział Programu na Klasy i Metody
+
+### Klasy
 
 Projekt został podzielony na następujące klasy:
 
-1. **Klasa 1:**
-   - Krótki opis klasy 1.
+1. **Ship** - *ships.py*
+   - Tworzy obiekt z parametrami wejściwoymi: `name`, `image`, `position`, `size`
+   - Jest wykorzystywany do reprezentacji statku oraz jego funkcjonalności
+   - Metody:
+     - create_fleet
+     - set_center_point
+     - rotate_ship
+     - rotate_image
+     - draw
+     - check_collision
+     - return_to_default_potition
+     - align_to_grid_edge
+     - align_to_grid
 
-2. **Klasa 2:**
-   - Krótki opis klasy 2.
+1. **Board** - *board.py*
+   - Tworzy obiekt z parametrami wejściwoymi: `rows`, `columns`, `cell_size`, `position`
+   - Reprezentuje planszę oraz tworzy jej logikę gry
+   - Metody:
+     - create_grid
+     - create_game_logic
+     - show_grid_on_screen
+
+1. **Token** - *board.py*
+   - Tworzy obiekt z parametrami wejściwoymi: `image`, `pos`
+   - Jest wykorzystywany do rysowania na planszy znczników: trafienia, chybienia
+   - Metody:
+     - draw
+
+1. **Button** - *buttons.py*
+   - Tworzy obiekt z parametrami wejściwoymi: `image`, `size`, `pos`, `msg`, `center=False`
+   - Jest wykorzystywany do reprezentacji przycisku w grze
+   - Metody:
+     - add_text
+     - focus_on_button
+     - action_on_press
+     - randomize
+     - reset
+     - draw
+
+1. **Gamer** - *gamers.py*
+   - Tworzy obiekt z parametrem wejściwoym: `board`
+   - Jest wykorzystywany do stworzenia klas Player, Bot
+   - Metody:
+     - clean_logic
+     - random_ships_placement
+     - update_game_logic
+
+1. **Player** - *gamers.py*
+   - Podklasa Gamer
+   - Tworzy obiekt z parametrem wejściwoym: `board`
+   - Odpowiada za możliwości rogrywki gracza
+   - Metody:
+     - make_attack
+
+1. **Bot** - *gamers.py*
+   - Podklasa Gamer
+   - Tworzy obiekt z parametrem wejściwoym: `board`
+   - Odpowiada za możliwości rogrywki komputera
+   - Metody:
+     - find_target
+     - make_attack
+
+---
+
+### Metody
+
+1. **set_default_resolution** - *settings.py* - ustawia domyślną rozdzielczość ekranu
+
+1. **read_resolution** - *settings.py* - wczytuje rozdzielczość ekranu z pliku
+
+1. **load_image** - *settings.py* - importuje obrazy
+
+1. **scale** - *settings.py* - skaluje rozmiary w zeleżności od rozdzielczości gry
+
+1. **show_game_logic** - *main.py* - wyświetla w terminalu logikę plansz gry
+
+1. **update_game_screen** - *main.py* - odświeża ekran gry
+
+1. **select_ship_and_move** - *main.py* - służy do początkowego rozstawienia statków przez gracza
 
 ## Instrukcja Użytkownika
 
