@@ -1,4 +1,5 @@
 import pygame
+import argparse
 from math import dist
 import numpy as np
 from settings import (GAME_SCREEN, START_BG, GAME_BG,
@@ -93,10 +94,14 @@ def select_ship_and_move(ship: Ship) -> None:
                     ship.rotate_ship()
 
 
-dev = False
+parser = argparse.ArgumentParser()
+parser.add_argument('-d', '--developer', action='store_true')
+args = parser.parse_args()
+
+dev = args.developer
 # change to True,
 # if you want use show_game_logic()
-# by middle mouse button
+# by middle mouse button after deploy ships
 
 # Main Game Loop
 if __name__ == "__main__":
