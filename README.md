@@ -20,6 +20,7 @@
     - [Opis formatu plików konfiguracyjnych](#opis-formatu-plików-konfiguracyjnych)
     - [Testy](#testy)
   - [Wymagania Sprzętowe](#wymagania-sprzętowe)
+  - [Diagram Architektury Projektu](#diagram-architektury-projektu)
   - [Część Refleksyjna](#część-refleksyjna)
   - [Zakończenie](#zakończenie)
 
@@ -238,6 +239,14 @@ pip install pytest
 
 Zainstalowany: [Python3](https://www.python.org/downloads/)  
 Minimalna rozdzielczość: 800x600
+
+## Diagram Architektury Projektu
+
+Projekt został zrealizowany na **architekturze monolitycznej**
+
+W architekturze monolitycznej cała aplikacja działa jako jedna jednostka, zazwyczaj z jednym wspólnym kodem źródłowym i bazą danych. Komponenty, takie jak interfejs użytkownika, logika biznesowa i warstwa danych, są zintegrowane w jednym miejscu.
+
+![Diagram Architektury](images/diagram.png)
 
 ## Część Refleksyjna
 
