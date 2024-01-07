@@ -188,7 +188,7 @@ W projekcie zostały wykorzystane następujące moduły:
 
 ---
 
-### Instalacja niebędnych modułów
+### Instalacja niezbędnych modułów
 
 W celu zainstalowania niezbędnych modułów należy użyć komendy:
 
