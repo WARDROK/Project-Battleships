@@ -15,7 +15,7 @@
     - [Metody](#metody)
   - [Instrukcja Użytkownika](#instrukcja-użytkownika)
     - [Wykorzytane moduły](#wykorzytane-moduły)
-    - [Instalacja niebędnych modułów](#instalacja-niebędnych-modułów)
+    - [Instalacja niezbędnych modułów](#instalacja-niezbędnych-modułów)
     - [Uruchomienie gry w trybie developera](#uruchomienie-gry-w-trybie-developera)
     - [Opis formatu plików konfiguracyjnych](#opis-formatu-plików-konfiguracyjnych)
     - [Testy](#testy)
