@@ -1,93 +1,170 @@
-# BATTLESHIPS
+# Projekt Battleships
 
+![Menu Start](images/menu.png)
 
+- [Projekt Battleships](#projekt-battleships)
+  - [Dokumentacja w Kodzie](#dokumentacja-w-kodzie)
+  - [Dane autora](#dane-autora)
+  - [Cel i Opis Projektu](#cel-i-opis-projektu)
+    - [Cel Projektu](#cel-projektu)
+    - [Opis Projektu](#opis-projektu)
+      - [Instrukcja Gracza](#instrukcja-gracza)
+      - [Funkcje Komputera](#funkcje-komputera)
+  - [Podział Programu na Klasy i Opis Klas](#podział-programu-na-klasy-i-opis-klas)
+  - [Instrukcja Użytkownika](#instrukcja-użytkownika)
+    - [Wykorzytane moduły](#wykorzytane-moduły)
+    - [Instalacja niebędnych modułów](#instalacja-niebędnych-modułów)
+    - [Uruchomienie gry w trybie developera](#uruchomienie-gry-w-trybie-developera)
+    - [Opis Formatu Plików Konfiguracyjnych](#opis-formatu-plików-konfiguracyjnych)
+    - [Testy](#testy)
+  - [Wymagania sprzętowe](#wymagania-sprzętowe)
+  - [Część Refleksyjna](#część-refleksyjna)
+  - [Zakończenie](#zakończenie)
 
-## Getting started
+## Dokumentacja w Kodzie
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Dokumentacja w kodzie jest realizowana poprzez tzw. docstrings.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Dane autora
 
-## Add your files
+**Autor:** Łukasz Szydlik
+**Email:** <01187295@pw.edu.pl>
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Cel i Opis Projektu
 
+### Cel Projektu
+
+Celem projektu jest stworzenie interaktywnej gry w statki, która umożliwi graczowi rywalizację z komputerem. Komputer ma za zadanie wykonywać logiczne ruchy, zgodne z zasadami gry w statki.
+
+### Opis Projektu
+
+Gra w statki to klasyczna gra strategiczna, w której dwaj gracze umieszczają swoje statki na planszy i starają się zatopić statki przeciwnika, oddając strzały na przemian. W naszym projekcie gracz będzie miał możliwość rywalizacji z komputerem, który będzie sterował własnymi statkami.
+
+#### Instrukcja Gracza
+
+1. **Rozstawienie statków:**
+   - Gracz rozstawia swoją flotę na planszy poprzez wybranie i umieszczenie statku za pomocą lewego przyciskiu myszy. Po wybraniu statku, gracz ma możliwość **obrócenia** okrętu klikając prawy przycisk myszy.
+   - Gracz może wybrać również losowe rostawienie za pomoą przycisku **Randomize**
+   - Wciśnięcie przycisku **Reset** spowoduje powrót statków na domyślną pozycję
+  
+2. **Rozpoczęcie rozgrywki:**
+   - Po rozstawieniu statków gracz klika przycisk **Deploy**, by rozpocząć rozgrywkę
+
+3. **Oddanie strzału:**
+   - W celu oddania strzału, gracz klika pozycję na planszy komputera i zatwierdza ją lewym przyciskiem myszy
+
+4. **Przyciski Menu i Quit**
+   - Przycisk **Menu**: Cofnięcie się do menu startowego
+   - Przycisk **Quit**: Wyjście z gry
+
+#### Funkcje Komputera
+
+1. **Logiczne Ruchy:**
+   - Komputer wykonuje logiczne ruchy, starając się trafiać w statki przeciwnika.
+  
+2. **Sprawdzanie Poprawności Strzałów:**
+   - Komputer nie strzela w pola, w których na pewno nie może być statku
+
+3. **Odkrywanie Reszty Statku:**
+   - Po trafieniu komputer stara się odkryć resztę statku, strzelając w pionie lub poziomie.
+
+![Menu Start](images/game.png)
+
+## Podział Programu na Klasy i Opis Klas
+
+Projekt został podzielony na następujące klasy:
+
+1. **Klasa 1:**
+   - Krótki opis klasy 1.
+
+2. **Klasa 2:**
+   - Krótki opis klasy 2.
+
+## Instrukcja Użytkownika
+
+W celu uruchomienia gry należy uruchomić terminal i przejść do folderu z plikiem main.py
+
+Następnie wpisać komendę:
+
+```python
+python3 main.py
 ```
-cd existing_repo
-git remote add origin https://gitlab-stud.elka.pw.edu.pl/lszydlik/battleships.git
-git branch -M main
-git push -uf origin main
+
+---
+
+### Wykorzytane moduły
+
+W projekcie zostały wykorzystane następujące moduły:
+
+- standardowe
+  - typing
+  - random
+  - argparse
+  - math
+  - pytest
+- niestandardowe
+  - NumPy
+  - PyGame
+
+---
+
+### Instalacja niebędnych modułów
+
+W celu zainstalowania niezbędnych modułów należy użyć komendy:
+
+```python
+python3 -m pip install -r requirements.txt
 ```
 
-## Integrate with your tools
+---
 
-- [ ] [Set up project integrations](https://gitlab-stud.elka.pw.edu.pl/lszydlik/battleships/-/settings/integrations)
+### Uruchomienie gry w trybie developera
 
-## Collaborate with your team
+Grę można uruchomić w trybie developera poprzez:
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+```python
+python3 main.py -d
+```
 
-## Test and Deploy
+Umożliwi to użytkownikowi dostep do wyświetlenia aktulanej logiki plansz gry w terminalu poprzez wciśniśnięcie środkowego przycisku myszy.
 
-Use the built-in continuous integration in GitLab.
+---
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### Opis Formatu Plików Konfiguracyjnych
 
-***
+W projekcie występuje plik konfiguracyjny: **screen_resolution.txt**
 
-# Editing this README
+W tym pliku użytkownik może wpisać rozmiary ekranu gry (podane w pikselach) zgodnie z następującym formatem domyślnym:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+```txt
+screen_width=1280
+screen_height=720
+```
 
-## Suggestions for a good README
+W razie jakichkolwiek błedów rozmiar ekranu po uruchomienu programu ustawi się na wartości domyślne. Następnie proszę ponownie uruchomić grę.
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+---
 
-## Name
-Choose a self-explaining name for your project.
+### Testy
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Domyślne testy sprawdzjące logikę planszy gry oraz wyjątków związanych z plikiem konfiguracyjnym znajdują się w pliku test_battleships.py i działają poprzez framework pytest.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## Wymagania sprzętowe
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+Zainstalowany: [Python3](https://www.python.org/downloads/)  
+Minimalna rozdzielczość: 800x600
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## Część Refleksyjna
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+- Co udało się osiągnąć:
+  - Stworzono w pełni działającą grę statki z interfejsem graficznym.
+- Rzeczy, które nie zostały zrealizowane, z komentarzem dlaczego.
+  - Nie dopracoano funckji load_image() znajdującej się w pliku settings.py która przez implementację w złym miejscu już podczas importowania settings.py inicjalizuje ekran gry. Zabrakło czasu na refaktoryzcję kodu poprzez umieszcznie funckji i zładowanie wszytkich grafik w main.py
+- Przeszkody napotkane podczas projektu i jak zostały one przezwyciężone.
+  - Funkcja która ma na celu dopasowanie statku do planszy, gdy jego fragment w momencie ustawiania wystawał poza planszę nie została idealnie dopracowana. Nie udało się rozwiązać dopasowania do planszy w przypadku, gdy statek jest w większości poza planszą, a dotyka jedynie rogu planszy, gdyż statek ustawiał się w taki sposób, że wystwał poza planszę. W tej sytuacji zdecydowałem się, że w takim przypadku statek powróci na swoją domyślną pozycję i będzie możliwy do ponownego ustawienia.
+- Zmiany w stosunku do pierwotnego planu rozwiązania.
+  - Pierwtotnie statki miały być rozstawiane bez możliwości sąsiadowania ze sobą. Jednakże przez ograniczoną ilość czasu zrezygnowałem z tej opcji.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+## Zakończenie
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Dziękuję za uwagę i zapraszam do korzystania z gry!
