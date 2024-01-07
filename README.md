@@ -4,7 +4,7 @@
 
 - [Projekt Battleships](#projekt-battleships)
   - [Dokumentacja w Kodzie](#dokumentacja-w-kodzie)
-  - [Dane autora](#dane-autora)
+  - [Dane Autora](#dane-autora)
   - [Cel i Opis Projektu](#cel-i-opis-projektu)
     - [Cel Projektu](#cel-projektu)
     - [Opis Projektu](#opis-projektu)
@@ -15,9 +15,9 @@
     - [Wykorzytane moduły](#wykorzytane-moduły)
     - [Instalacja niebędnych modułów](#instalacja-niebędnych-modułów)
     - [Uruchomienie gry w trybie developera](#uruchomienie-gry-w-trybie-developera)
-    - [Opis Formatu Plików Konfiguracyjnych](#opis-formatu-plików-konfiguracyjnych)
+    - [Opis formatu plików konfiguracyjnych](#opis-formatu-plików-konfiguracyjnych)
     - [Testy](#testy)
-  - [Wymagania sprzętowe](#wymagania-sprzętowe)
+  - [Wymagania Sprzętowe](#wymagania-sprzętowe)
   - [Część Refleksyjna](#część-refleksyjna)
   - [Zakończenie](#zakończenie)
 
@@ -25,7 +25,7 @@
 
 Dokumentacja w kodzie jest realizowana poprzez tzw. docstrings.
 
-## Dane autora
+## Dane Autora
 
 **Autor:** Łukasz Szydlik
 **Email:** <01187295@pw.edu.pl>
@@ -101,7 +101,6 @@ W projekcie zostały wykorzystane następujące moduły:
   - random
   - argparse
   - math
-  - pytest
 - niestandardowe
   - NumPy
   - PyGame
@@ -130,7 +129,7 @@ Umożliwi to użytkownikowi dostep do wyświetlenia aktulanej logiki plansz gry 
 
 ---
 
-### Opis Formatu Plików Konfiguracyjnych
+### Opis formatu plików konfiguracyjnych
 
 W projekcie występuje plik konfiguracyjny: **screen_resolution.txt**
 
@@ -141,7 +140,7 @@ screen_width=1280
 screen_height=720
 ```
 
-W razie jakichkolwiek błedów rozmiar ekranu po uruchomienu programu ustawi się na wartości domyślne. Następnie proszę ponownie uruchomić grę.
+W razie jakichkolwiek błędów, rozmiar ekranu po uruchomienu programu ustawi się na wartości domyślne. Następnie proszę ponownie uruchomić grę.
 
 ---
 
@@ -149,7 +148,13 @@ W razie jakichkolwiek błedów rozmiar ekranu po uruchomienu programu ustawi si�
 
 Domyślne testy sprawdzjące logikę planszy gry oraz wyjątków związanych z plikiem konfiguracyjnym znajdują się w pliku test_battleships.py i działają poprzez framework pytest.
 
-## Wymagania sprzętowe
+Komenda do instalacji pytest:
+
+```python
+pip install pytest
+```
+
+## Wymagania Sprzętowe
 
 Zainstalowany: [Python3](https://www.python.org/downloads/)  
 Minimalna rozdzielczość: 800x600
@@ -159,7 +164,7 @@ Minimalna rozdzielczość: 800x600
 - Co udało się osiągnąć:
   - Stworzono w pełni działającą grę statki z interfejsem graficznym.
 - Rzeczy, które nie zostały zrealizowane, z komentarzem dlaczego.
-  - Nie dopracoano funckji load_image() znajdującej się w pliku settings.py która przez implementację w złym miejscu już podczas importowania settings.py inicjalizuje ekran gry. Zabrakło czasu na refaktoryzcję kodu poprzez umieszcznie funckji i zładowanie wszytkich grafik w main.py
+  - Nie dopracoano funkcji load_image() znajdującej się w pliku settings.py która przez implementację w złym miejscu już podczas importowania settings.py inicjalizuje ekran gry. Zabrakło czasu na refaktoryzcję kodu poprzez umieszcznie funckji i zładowanie wszytkich grafik w main.py
 - Przeszkody napotkane podczas projektu i jak zostały one przezwyciężone.
   - Funkcja która ma na celu dopasowanie statku do planszy, gdy jego fragment w momencie ustawiania wystawał poza planszę nie została idealnie dopracowana. Nie udało się rozwiązać dopasowania do planszy w przypadku, gdy statek jest w większości poza planszą, a dotyka jedynie rogu planszy, gdyż statek ustawiał się w taki sposób, że wystwał poza planszę. W tej sytuacji zdecydowałem się, że w takim przypadku statek powróci na swoją domyślną pozycję i będzie możliwy do ponownego ustawienia.
 - Zmiany w stosunku do pierwotnego planu rozwiązania.
