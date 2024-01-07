@@ -39,7 +39,7 @@ class Gamer:
             while not valid_position:
                 ship.return_to_default_potition()
                 rotate_ship = random.choice([True, False])
-                size = (ship.h_image.get_width()//CELL_SIZE)
+                size = int((ship.h_image.get_width()//CELL_SIZE))
                 if rotate_ship is True:
                     ship.rotate_ship()
                     y = random.randint(0, ROWS - size)
